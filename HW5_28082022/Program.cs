@@ -15,6 +15,10 @@ namespace HW5
     {
         static void Main(string[] args)
         {
+
+
+
+            // test
             #region task 1
 
             // предпочитаемое расписание

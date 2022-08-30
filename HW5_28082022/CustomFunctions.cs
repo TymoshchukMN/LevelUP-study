@@ -33,12 +33,38 @@ internal class CustomFunctions
     /// </summary>
     public static bool CheckSymbol(char symbol)
     {
-        if (symbol == '1' || symbol == '2' || symbol == '3' || symbol == '4' ||
-            symbol == '5' || symbol == '6' || symbol == '7' || symbol == '0' ||
-            symbol == '+' || symbol == '0')
+        switch ((AllowedSymbols)symbol)
         {
-            return true;
+            case AllowedSymbols.Monday:
+                return true;
+            case AllowedSymbols.Tuesday:
+                break;
+            case AllowedSymbols.Wednesday:
+                break;
+            case AllowedSymbols.Thursday:
+                break;
+            case AllowedSymbols.Friday:
+                break;
+            case AllowedSymbols.Saturday:
+                break;
+            case AllowedSymbols.Sunday:
+                break;
+            case AllowedSymbols.save:
+                break;
+            case AllowedSymbols.reset:
+                break;
+            default:
+                break;
         }
+
+
+
+        //if (symbol == '1' || symbol == '2' || symbol == '3' || symbol == '4' ||
+        //    symbol == '5' || symbol == '6' || symbol == '7' || symbol == '0' ||
+        //    symbol == '+' || symbol == '0')
+        //{
+        //    return true;
+        //}
         return false;
     }
 
@@ -120,6 +146,8 @@ internal class CustomFunctions
 
     public static void CreateSchedule(ref byte preferedSchedule, ref byte currentSchedule, char zero, char plus)
     {
+        #region banner
+
         // вывод банера
         Console.ForegroundColor = ConsoleColor.Gray;
         Console.SetCursorPosition(0, 0);
@@ -144,6 +172,8 @@ internal class CustomFunctions
         DisplayPreferedSchedule(preferedSchedule);
         DisplayCurrentSchedule(currentSchedule);
         Console.SetCursorPosition(0, 7);
+
+        #endregion banner
 
         // инициализация переменной для дальнейшего использования в цикле
         char userInput;

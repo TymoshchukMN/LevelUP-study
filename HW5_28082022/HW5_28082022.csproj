@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllowedSymbols.cs" />
     <Compile Include="CustomFunctions.cs" />
     <Compile Include="Days.cs" />
     <Compile Include="Program.cs" />

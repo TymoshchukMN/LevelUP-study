@@ -50,7 +50,6 @@ namespace HW5
 
                 // отображение расписания
                 CustomFunctions.DisplayCurrentSchedule(currentSchedule);
-
             }
             else
             {

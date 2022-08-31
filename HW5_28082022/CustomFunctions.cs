@@ -111,7 +111,8 @@ internal class CustomFunctions
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.SetCursorPosition(0, 6);
-        Console.WriteLine("Prefered Schedule:\t{0,8}", Convert.ToString(scheduleForDisplay, 2));
+        Console.WriteLine("Prefered Schedule:\t{0,8}", (HW5.Days)scheduleForDisplay);
+        
         Console.ForegroundColor = ConsoleColor.White;
     }
 
@@ -122,7 +123,7 @@ internal class CustomFunctions
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.SetCursorPosition(0, 5);
-        Console.WriteLine("Current Schedule:\t{0,8}", Convert.ToString(scheduleForDisplay, 2));
+        Console.WriteLine("Current Schedule:\t{0,8}", (HW5.Days)scheduleForDisplay);
         Console.ForegroundColor = ConsoleColor.White;
     }
 
@@ -138,10 +139,33 @@ internal class CustomFunctions
     }
 
     /// <summary>
+    /// очистка строки вывода расписания предпочитаемого расписания
+    /// </summary>
+    public static void ClearPreferedScheduleLine(int leftPosition, int topPosition)
+    {        
+        const ushort currentLineCursorTop = 6;
+        const ushort currentLineCursorLeft = 20;
+        Console.SetCursorPosition(currentLineCursorLeft, currentLineCursorTop);
+        Console.Write(new string(' ', Console.WindowWidth - currentLineCursorLeft));
+        Console.SetCursorPosition(leftPosition, topPosition);
+    }
+
+    /// <summary>
+    /// очистка строки вывода расписания текущего расписания
+    /// </summary>
+    public static void ClearPreferedScheduleLine(int leftPosition, int topPosition)
+    {        
+        const ushort currentLineCursorTop = 5;
+        const ushort currentLineCursorLeft = 20;
+        Console.SetCursorPosition(currentLineCursorLeft, currentLineCursorTop);
+        Console.Write(new string(' ', Console.WindowWidth - currentLineCursorLeft));
+        Console.SetCursorPosition(leftPosition, topPosition);
+    }
+
+
+    /// <summary>
     /// Показываем что дальше делать пользователю
     /// </summary>
-    /// 
-
     public static void ShowWhatToDoNext() 
     {
         Console.SetCursorPosition(0,9);
@@ -185,6 +209,7 @@ internal class CustomFunctions
 
         do
         {
+            ClearCurrentConsoleLine();
             // запрос у пользователя символа
             userInput = Console.ReadKey().KeyChar;
 
@@ -198,12 +223,17 @@ internal class CustomFunctions
                     // чтобы убрать бит, преобразовываем маску используя побитовое НЕ
                     // затем побитовое И 00000010 & 11111101
                     preferedSchedule = (byte)(preferedSchedule & ~GetMask(userInput));
+
+                    ClearScheduleLine(Console.CursorLeft,Console.CursorTop);
                     DisplayPreferedSchedule(preferedSchedule);
+
                 }
                 else
                 {
                     preferedSchedule = (byte)(preferedSchedule | GetMask(userInput));
+
                     DisplayPreferedSchedule(preferedSchedule);
+
                 }
             }
             else

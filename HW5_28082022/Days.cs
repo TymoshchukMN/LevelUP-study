@@ -8,7 +8,7 @@ namespace HW5
     [Flags]
     enum Days:byte
     {
-        none        = 0b00000000,
+        None        = 0b00000000,
         Monday      = 0b00000001,
         Tuesday     = 0b00000010,
         Wednesday   = 0b00000100,

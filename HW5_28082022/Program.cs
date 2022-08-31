@@ -1,4 +1,4 @@
-﻿// дз с расписанием с битпми, переделать используя перечисления с флагами
+﻿// дз с расписанием с битами, переделать используя перечисления с флагами
 // рефакторинг используя функции
 // функция swap, которая меняет занчения между собой a → b, b → a, количество аргументов может быть произвольной + произвольный вид передачи параметров
 
@@ -32,41 +32,59 @@ namespace HW5
             // отображение предпочитаемого расписания
             CustomFunctions.DisplayPreferedSchedule(preferedSchedule);
 
-            // всоздание расписание
+            // создание расписание
             CustomFunctions.CreateSchedule(ref preferedSchedule, ref currentSchedule, zero, plus);
+            
+            // показываем пользователю варианты выбора того, что делать после сохранения расписания
             Console.SetCursorPosition(0,9);
-            Console.WriteLine("For reseting pass, press '-', for changing, press '/', or any another symbol for finish");
+            
+            // чё дальше
+            CustomFunctions.ShowWhatToDoNext();
+
+            // очистка текущей строки
             CustomFunctions.ClearCurrentConsoleLine();
 
-            char usersAnswer = Console.ReadKey().KeyChar;
+            char usersAnswer;
 
-            if (usersAnswer == '-')
-            {
-                // оичстка текуще строки
-                CustomFunctions.ClearCurrentConsoleLine();
-
-                // сброс расписания используя побитовые НЕ и И
-                currentSchedule = (byte)(~currentSchedule & currentSchedule);
-
-                // отображение расписания
-                CustomFunctions.DisplayCurrentSchedule(currentSchedule);
-            }
-            else
-            {
-                if (usersAnswer == '/')
+            do
+	        {
+                usersAnswer = Console.ReadKey().KeyChar;
+                if (usersAnswer == '-')
                 {
-                    // изменение расписания
-                    Console.Clear();
-                    CustomFunctions.CreateSchedule(ref preferedSchedule, ref currentSchedule, zero, plus);
-                }
-            }
+                    // оичстка текуще строки
+                    CustomFunctions.ClearCurrentConsoleLine();
 
+                    // сброс расписания используя побитовые НЕ и И
+                    currentSchedule = (byte)(~currentSchedule & currentSchedule);
+
+                    // отображение расписания
+                    CustomFunctions.DisplayCurrentSchedule(currentSchedule);
+                
+                    Console.SetCursorPosition(0,8);
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Schedule reseted");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+
+                    // чё дальше
+                    CustomFunctions.ShowWhatToDoNext();
+                }
+                else
+                {
+                    if (usersAnswer == '/')
+                    {
+                        // изменение расписания
+                        Console.Clear();
+
+                        // повторный вызов функции на создание расписания
+                        CustomFunctions.CreateSchedule(ref preferedSchedule, ref currentSchedule, zero, plus);
+                    }
+                }            
+	        } while (usersAnswer != zero);
+            
             Console.ReadKey();
 
             #endregion task 1
 
-        }
-
-       
+        }      
     }
 }

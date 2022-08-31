@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// Список допустимых символов для установки графика
 /// </summary>
-enum AllowedSymbols
+enum AllowedSymbols : ushort
 {
     none        = 0,
     Monday      = 49,   // 1
@@ -12,6 +12,7 @@ enum AllowedSymbols
     Saturday    = 54,   // 6
     Sunday      = 55,   // 7
     save        = 43,   // +
-    reset       = 45    // -
+    reset       = 45,    // -
+    zero        = 48    // 0
 }
 

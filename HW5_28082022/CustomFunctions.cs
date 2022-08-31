@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 /// <summary>
 /// Пользовательские функции 
 /// </summary>
-
 internal class CustomFunctions
 {
     /// <summary>
@@ -23,7 +22,9 @@ internal class CustomFunctions
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(" - wrong symbol, try again: ");
             symbol = Console.ReadKey().KeyChar;
+            
             ClearCurrentConsoleLine();
+
         } while (!CheckSymbol(symbol));
         return symbol;
     }
@@ -38,33 +39,24 @@ internal class CustomFunctions
             case AllowedSymbols.Monday:
                 return true;
             case AllowedSymbols.Tuesday:
-                break;
+                return true;
             case AllowedSymbols.Wednesday:
-                break;
+                return true;
             case AllowedSymbols.Thursday:
-                break;
+                return true;
             case AllowedSymbols.Friday:
-                break;
+                return true;
             case AllowedSymbols.Saturday:
-                break;
+                return true;
             case AllowedSymbols.Sunday:
-                break;
+                return true;
             case AllowedSymbols.save:
-                break;
+                return true;
             case AllowedSymbols.reset:
-                break;
-            default:
-                break;
+                return true;
+            case AllowedSymbols.zero:
+                return true;
         }
-
-
-
-        //if (symbol == '1' || symbol == '2' || symbol == '3' || symbol == '4' ||
-        //    symbol == '5' || symbol == '6' || symbol == '7' || symbol == '0' ||
-        //    symbol == '+' || symbol == '0')
-        //{
-        //    return true;
-        //}
         return false;
     }
 
@@ -98,12 +90,13 @@ internal class CustomFunctions
         return 0b00000000;
     }
 
-    /// <summary>проверка установлен ли бит, указываемый пользователем
-    /// если текущее состояние расписания совпадает с тем которое может быть 
-    /// установлена с помощью маски, то считаем, чтобит установлен
+    /// <summary>
+    /// проверка установлен ли бит, указываемый пользователем
     /// </summary>
     public static bool IsBitSetUp(byte checkedSchedule, byte mask)
     {
+        // если текущее состояние расписания совпадает с тем которое может быть
+        // установлена с помощью маски, то считаем, чтобит установлен
         if (checkedSchedule == (byte)(checkedSchedule | mask))
         {
             return true;
@@ -144,6 +137,18 @@ internal class CustomFunctions
         Console.SetCursorPosition(0, currentLineCursor);
     }
 
+    /// <summary>
+    /// Показываем что дальше делать пользователю
+    /// </summary>
+    /// 
+
+    public static void ShowWhatToDoNext() 
+    {
+        Console.SetCursorPosition(0,9);
+        Console.WriteLine("For reseting pass, press '-', for changing, press '/', or any another symbol for finish");
+    }
+
+
     public static void CreateSchedule(ref byte preferedSchedule, ref byte currentSchedule, char zero, char plus)
     {
         #region banner
@@ -177,10 +182,14 @@ internal class CustomFunctions
 
         // инициализация переменной для дальнейшего использования в цикле
         char userInput;
+
         do
         {
+            // запрос у пользователя символа
             userInput = Console.ReadKey().KeyChar;
+
             ClearCurrentConsoleLine();
+
             if (CheckSymbol(userInput))
             {
                 // проверка на наличие бита. Если бит установлен, то убираем его
@@ -208,11 +217,12 @@ internal class CustomFunctions
                 // присваеваем желаемое расписание действительному
                 currentSchedule = preferedSchedule;
 
-                Console.SetCursorPosition(0, 9);
+                Console.SetCursorPosition(0, 8);
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("You printed '+', schedule was saved");
+                Console.Write("Schedule saved");
                 Console.ForegroundColor = ConsoleColor.White;
                 DisplayCurrentSchedule(currentSchedule);
+                Console.SetCursorPosition(0, 9);
 
             }
             else

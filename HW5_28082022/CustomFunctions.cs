@@ -153,7 +153,7 @@ internal class CustomFunctions
     /// <summary>
     /// очистка строки вывода расписания текущего расписания
     /// </summary>
-    public static void ClearPreferedScheduleLine(int leftPosition, int topPosition)
+    public static void ClearCurrentScheduleLine(int leftPosition, int topPosition)
     {        
         const ushort currentLineCursorTop = 5;
         const ushort currentLineCursorLeft = 20;
@@ -169,7 +169,12 @@ internal class CustomFunctions
     public static void ShowWhatToDoNext() 
     {
         Console.SetCursorPosition(0,9);
-        Console.WriteLine("For reseting pass, press '-', for changing, press '/', or any another symbol for finish");
+        Console.WriteLine("For reseting schedule, press ");
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write("'-'");
+        Console.ForegroundColor = ConsoleColor.Gray;
+        Console.Write();
+        //'-', for changing, press '/', or any another symbol for finish");
     }
 
 
@@ -224,7 +229,8 @@ internal class CustomFunctions
                     // затем побитовое И 00000010 & 11111101
                     preferedSchedule = (byte)(preferedSchedule & ~GetMask(userInput));
 
-                    ClearScheduleLine(Console.CursorLeft,Console.CursorTop);
+                    // очистка предпочитаемого расписания в консоли, перед отображением нового
+                    ClearPreferedScheduleLine(Console.CursorLeft,Console.CursorTop);
                     DisplayPreferedSchedule(preferedSchedule);
 
                 }
@@ -232,6 +238,8 @@ internal class CustomFunctions
                 {
                     preferedSchedule = (byte)(preferedSchedule | GetMask(userInput));
 
+                    // очистка предпочитаемого расписания в консоли, перед отображением нового
+                    ClearPreferedScheduleLine(Console.CursorLeft,Console.CursorTop);
                     DisplayPreferedSchedule(preferedSchedule);
 
                 }
@@ -251,6 +259,12 @@ internal class CustomFunctions
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Schedule saved");
                 Console.ForegroundColor = ConsoleColor.White;
+
+                // чё дальше
+                CustomFunctions.ShowWhatToDoNext();
+                
+                // очистка текущего расписания в консоли, перед отображением нового
+                ClearCurrentScheduleLine(Console.CursorLeft,Console.CursorTop);
                 DisplayCurrentSchedule(currentSchedule);
                 Console.SetCursorPosition(0, 9);
 

@@ -51,6 +51,9 @@ namespace HW5
                 usersAnswer = Console.ReadKey().KeyChar;
                 if (usersAnswer == '-')
                 {
+                    // очистка текущего расписания в консоли, перед отображением нового
+                    CustomFunctions.ClearCurrentScheduleLine(Console.CursorLeft,Console.CursorTop);
+                                        
                     // оичстка текуще строки
                     CustomFunctions.ClearCurrentConsoleLine();
 
@@ -67,6 +70,8 @@ namespace HW5
 
                     // чё дальше
                     CustomFunctions.ShowWhatToDoNext();
+
+                      
                 }
                 else
                 {

@@ -169,11 +169,15 @@ internal class CustomFunctions
     public static void ShowWhatToDoNext() 
     {
         Console.SetCursorPosition(0,9);
-        Console.WriteLine("For reseting schedule, press ");
+        Console.Write("For reseting schedule, press: ");
         Console.ForegroundColor = ConsoleColor.Red;
         Console.Write("'-'");
         Console.ForegroundColor = ConsoleColor.Gray;
-        Console.Write();
+        Console.Write(" for changing, press: ");
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write("'/'");
+        Console.ForegroundColor = ConsoleColor.Gray;
+        Console.Write(" or any another symbol for finish");
         //'-', for changing, press '/', or any another symbol for finish");
     }
 
@@ -261,7 +265,7 @@ internal class CustomFunctions
                 Console.ForegroundColor = ConsoleColor.White;
 
                 // чё дальше
-                CustomFunctions.ShowWhatToDoNext();
+                ShowWhatToDoNext();
                 
                 // очистка текущего расписания в консоли, перед отображением нового
                 ClearCurrentScheduleLine(Console.CursorLeft,Console.CursorTop);

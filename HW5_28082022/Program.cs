@@ -23,8 +23,8 @@ namespace HW5
             // фактическое расписание
             byte currentSchedule = 0b00000000;  
             
-            char zero = '0';
-            char plus = '+';
+            const char zero = '0';
+            const char plus = '+';
 
             // вывод текущего расписания
             CustomFunctions.DisplayCurrentSchedule(currentSchedule);
@@ -36,13 +36,13 @@ namespace HW5
             CustomFunctions.CreateSchedule(ref preferedSchedule, ref currentSchedule, zero, plus);
             
             // показываем пользователю варианты выбора того, что делать после сохранения расписания
-            Console.SetCursorPosition(0,9);
+            //Console.SetCursorPosition(0,9);
             
             // чё дальше
-            CustomFunctions.ShowWhatToDoNext();
+            //CustomFunctions.ShowWhatToDoNext();
 
             // очистка текущей строки
-            CustomFunctions.ClearCurrentConsoleLine();
+            //CustomFunctions.ClearCurrentConsoleLine();
 
             char usersAnswer;
 
@@ -71,7 +71,6 @@ namespace HW5
                     // чё дальше
                     CustomFunctions.ShowWhatToDoNext();
 
-                      
                 }
                 else
                 {

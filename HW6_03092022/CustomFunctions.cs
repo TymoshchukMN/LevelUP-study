@@ -128,6 +128,27 @@ namespace HW6_03092022
             // вызов метода на вывод символов
             CustomFunctions.printSymbols(userinput);
         }
-    
+
+
+        public static bool RepeatedRequest(ref string str)
+        {
+            if (!int.TryParse(str, out int _))
+            {
+                Console.WriteLine("Input number one more time: ");
+                str = Console.ReadLine();
+                RepeatedRequest(ref str);
+
+            }
+            return true;
+        }
+
+        public static void LaunchTask2()
+        {
+            Console.Clear();
+            Console.WriteLine("Input number: ");
+            string checkingString = Console.ReadLine();
+            RepeatedRequest(ref checkingString);
+            Console.WriteLine("Congrats '{0}' - is number", checkingString);
+        }
     }
 }

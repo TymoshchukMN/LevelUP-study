@@ -22,16 +22,24 @@ namespace HW6_03092022
             switch ((TaskNumber)userChoise)
             {
                 case TaskNumber.Firts:
+
                     Console.Clear();
                     CustomFunctions.LaunchTask1();
+
                     break;
+
                 case TaskNumber.Second:
+
+                    Console.Clear();
+                    CustomFunctions.LaunchTask2();
+
                     break;
+
                 case TaskNumber.Third:
+
                     Console.Clear();
                     CustomFunctions.LaunchTask3();
-                    break;
-                default:
+
                     break;
             }
 

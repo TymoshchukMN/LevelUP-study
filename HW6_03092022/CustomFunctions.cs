@@ -34,16 +34,14 @@ namespace HW6_03092022
                 // всеряем символ вначале строки с символом в конце (двигаемся на встречу друг другу)
                 if (verifiableString[startPosition] == verifiableString[lastPosition])
                 {
-                    ++startPosition;
-                    --lastPosition;
-
                     // вызов рекурсии
-                    IsPalindrom(verifiableString, ref isPalindrom, lastPosition, startPosition);
+                    IsPalindrom(verifiableString, ref isPalindrom, lastPosition - 1, startPosition + 1);
                 }
                 else
                 {
                     // увеличиваем на 1 бит, из-за того, что символы не совпадают
                     isPalindrom |= 0b1;
+                    return isPalindrom == 0b0;
                 }
             }
             
@@ -129,7 +127,9 @@ namespace HW6_03092022
             CustomFunctions.printSymbols(userinput);
         }
 
-
+        /// <summary>
+        /// Повторный запрос ввода
+        /// </summary>
         public static bool RepeatedRequest(ref string str)
         {
             if (!int.TryParse(str, out int _))
@@ -142,6 +142,9 @@ namespace HW6_03092022
             return true;
         }
 
+        /// <summary>
+        /// Запуск 2-й задачи
+        /// </summary>
         public static void LaunchTask2()
         {
             Console.Clear();

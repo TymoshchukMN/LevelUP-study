@@ -1,6 +1,8 @@
 ﻿/// <summary>
 /// Типы погоды
 /// </summary>
+
+[System.Flags] 
 enum  WeatherType
 {
     none        = 0,

@@ -25,7 +25,6 @@ namespace HW8
 
         #endregion константы
 
-
         /// <summary>
         /// Вызов первой задачи
         /// </summary>
@@ -611,5 +610,13 @@ namespace HW8
             }
         }
 
+        /// <summary>
+        /// Запуск 4-й задачи (погодный агрегатор)
+        /// </summary>
+        public static void LaunchTask4()
+        { 
+
+        }
+    
     }
 }

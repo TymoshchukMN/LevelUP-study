@@ -12,13 +12,6 @@ namespace HW7
         static void Main(string[] args)
         {
 
-            int[] tmp = new int[16];
-            CustomFunctions.ArrayFilling(ref tmp,0,50);
-
-            CustomFunctions.SortAraayByQuick(ref tmp,0,8);
-
-
-
             Console.WriteLine("Выберите задачу для запуска:\n\n" +
                 "1. min, max в массиве поменять местами\n" +
                 "2. Смещение внутри массива\n" +
@@ -37,8 +30,8 @@ namespace HW7
                     CustomFunctions.ReplaceArrayElenents();
                     break;
                 case EnumTasks.second:
-                    
-                    // вызов задачи на смещение
+
+                                       // вызов задачи на смещение
                     CustomFunctions.LaunchTask2();
                     break;
                 case EnumTasks.third:

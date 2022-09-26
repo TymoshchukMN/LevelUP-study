@@ -23,7 +23,7 @@ internal class CustomFunctions
     /// <param name="array"> массив для заполнения </param>
     /// <param name="start"> минимальное число для рандома </param>
     /// <param name="last"> максимальное число для рандома </param>
-    public static void ArrayFilling(ref int[] array, int start, int last)
+    public static void FillArray(ref int[] array, int start, int last)
     {
         Random random = new Random();
 
@@ -142,7 +142,7 @@ internal class CustomFunctions
         int[] customArray = new int[ARRAY_SIZE];
         
         // наполение массива
-        ArrayFilling(ref customArray, START_RANDOM_RANGE, END_RANDOM_RANGE);
+        FillArray(ref customArray, START_RANDOM_RANGE, END_RANDOM_RANGE);
 
         // количество символов в массиве при выводе на консоль (для красоты)
         int charsCountInArray = CalculateCharCount(customArray);
@@ -194,7 +194,7 @@ internal class CustomFunctions
         int [] customArray = new int[arraySize];
 
         // заполнение массива значениями
-        ArrayFilling(ref customArray, START_RANDOM_RANGE, END_RANDOM_RANGE);
+        FillArray(ref customArray, START_RANDOM_RANGE, END_RANDOM_RANGE);
                 
         Console.Write("Укажите количество элементов для смещения:\t");
         
@@ -212,7 +212,7 @@ internal class CustomFunctions
     /// <summary>
     /// функ-я смещения элементов в массиве
     /// </summary>
-    /// <param name="Direction">
+    /// <param name="direction">
     /// направление смещения
     /// </param>
     /// <param name="customArray"> 
@@ -224,14 +224,14 @@ internal class CustomFunctions
     /// <param name="countBoardSymbols">
     /// соличество символов в массиве, преобразованном в строку
     /// </param>
-    public static void ShiftArrayElements(EnumDirectionOffset Direction, 
+    public static void ShiftArrayElements(EnumDirectionOffset direction, 
             int countBoardSymbols, int countPositions, ref int[] customArray)
     {
         int[] tempArray = new int[customArray.Length];
         
         // количество символов в массиве, преобразованном в строку
         int charsCountInArray = 0;
-        switch (Direction)
+        switch (direction)
         {
             case EnumDirectionOffset.left:
 
@@ -263,7 +263,7 @@ internal class CustomFunctions
                         // [1, 3, 4, 5, 15, 10] → [5, 15, 10, 0, 0, 4]
                         // [1, 3, 4, 5, 15, 10] → [5, 15, 10, 0, 3, 4]
 
-                        tempArray[countOffsetLeft+i] = customArray[i];
+                        tempArray[countOffsetLeft + i] = customArray[i];
                     }
                 }
 
@@ -336,7 +336,7 @@ internal class CustomFunctions
         int[] sortedArray = new int[ARRAY_SIZE];
 
         // заполнение массива значениями
-        ArrayFilling(ref sortedArray, START_RANDOM_RANGE, END_RANDOM_RANGE);
+        FillArray(ref sortedArray, START_RANDOM_RANGE, END_RANDOM_RANGE);
 
         // печатаем массив ДО сортировки
         //Console.WriteLine("Массив ДО сортировок: ");
@@ -503,17 +503,16 @@ internal class CustomFunctions
     /// <param name="arrayForSort">
     /// массив для сортировки
     /// </param>
-    public static void SortArrayByInsertion(int[] arrayForSort, int temVol = 0, 
-            int compareIndex = 0)
+    public static void SortArrayByInsertion(int[] arrayForSort)
     {
         for (int i = 1; i < arrayForSort.Length; i++)
         {
             // индекс элемента для сравнения 
-            compareIndex = i - 1;
+            int compareIndex = i - 1;
 
             // переменная для хранения минимального значения,
             // которое будет смещено влево
-            temVol = arrayForSort[i];
+            int temVol = arrayForSort[i];
             
             // проверку выполняем до тех пор, пока не дойдем
             // в сравнении до нулевого индекса, или цикл не прервется, 
@@ -607,6 +606,20 @@ internal class CustomFunctions
     }
 
     /// <summary>
+    /// Замена местами большего и меньшего значений
+    /// </summary>
+    /// <param name="arrayForSort"> массив для замены </param>
+    /// <param name="indexMinVol"> индекс меньшего значения </param>
+    /// <param name="indexMaxVol"> индекс большего значения </param>
+    public static void ReplaceArrayItemsByIndex(ref int[] arrayForSort, int indexMinVol, int indexMaxVol)
+    {
+        int tempVol = 0;
+        tempVol = arrayForSort[indexMinVol];
+        arrayForSort[indexMinVol] = arrayForSort[indexMaxVol];
+        arrayForSort[indexMaxVol] = tempVol;
+    }
+
+    /// <summary>
     /// БЫСТРАЯ сортировка массива
     /// </summary>
     /// <param name="arrayForSort">
@@ -616,41 +629,40 @@ internal class CustomFunctions
             int startIndex, int stopIndex)
     {
         // получаем "опорный" индекс
-        int targetIndex = (stopIndex - startIndex) / 2 + startIndex;
-        
-        // переменная временного хранение элментов при замене местами 
-        int tmpVol = 0;
+        int targetIndex = stopIndex;
 
-        // выполняем просмотр значений слева до опорного индекса
         do
         {
             if (arrayForSort[startIndex] > arrayForSort[targetIndex])
             {
-                // ищем значение больше опорного индекса (поиск с конца массива)
-                for (int i = stopIndex; i > targetIndex; i--)
+                if (arrayForSort[targetIndex] < arrayForSort[stopIndex - 1])
                 {
-                    // если элемени справа меньше опорного
-                    if (arrayForSort[targetIndex] > arrayForSort[i])
+                    ReplaceArrayItemsByIndex(ref arrayForSort, startIndex, stopIndex - 1);
+                }
+                else
+                {
+                    if (arrayForSort[startIndex] > arrayForSort[stopIndex - 1])
                     {
-                        // запоминаем значение, которое меньше и находится
-                        // справа от опорного индекса
-                        tmpVol = arrayForSort[i];
-
-                        // меняем местами элементы справа и слева от опорного индекса
-                        arrayForSort[i] = arrayForSort[startIndex];
-                        arrayForSort[startIndex] = tmpVol;
-
-                        // завершаем поиск элементов справа от опорного индекса
-                        break;
+                        ReplaceArrayItemsByIndex(ref arrayForSort, startIndex, stopIndex - 1);
                     }
                 }
             }
-
+            else
+            {
+                if (arrayForSort[targetIndex] < arrayForSort[stopIndex - 1])
+                {
+                    ReplaceArrayItemsByIndex(ref arrayForSort, targetIndex, stopIndex - 1);
+                }
+            }
             ++startIndex;
+            --stopIndex;
+        } while (startIndex >= arrayForSort.Length / 2);
+        //startIndex =    
+        SortAraayByQuick(ref arrayForSort, 0, targetIndex - 1);
+        SortAraayByQuick(ref arrayForSort, targetIndex + 1, arrayForSort.Length - 1);
 
         // проверяем до тех пор, пока начальный индекс меньше опорного 
-        } while (startIndex < targetIndex);
-        
+        //SortAraayByQuick(ref arrayForSort, startIndex - targetIndex, targetIndex);
     }
 
 }

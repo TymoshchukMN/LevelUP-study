@@ -181,34 +181,18 @@ namespace HW8
                     CommonCustomFunctions.START_RANDOM_RANGE,
                     CommonCustomFunctions.END_RANDOM_RANGE);
 
-            // печать одномерного массива
-            CommonCustomFunctions.PrintArray(multiArray);
+            // печать многомерного массива
+            PrintArray(multiArray);
 
-            // столбец до которого будет выполняться работа цикла
-            // в замене элементов диагонали
-            int centralColumn;
+            // вызов функции на элементов в основной и
+            // дополнительной диагонали
+            ChangeItemsDiagonal(multiArray);
 
-            // если сзначения ((ROW_COUNT / 2.0) != ROW_COUNT / 2 
-            // не равны, то число дробное, поэтому столбец 
-            // centralColumn увеличиваем на 1
-            if ((ROW_COUNT / 2.0) != ROW_COUNT / 2)
-            {
-                // число дробное
-
-                centralColumn = (ROW_COUNT / 2) + 1;
-            }
-            else
-            {
-                // число НЕ дробное
-
-                centralColumn = (ROW_COUNT / 2);
-            }
-
-
+            // печать многомерного массива после смены
+            PrintArray(multiArray);
             Console.ReadKey();
         }
-
-
+        
         /// <summary>
         /// Запуск 4-й задачи (погодный агрегатор)
         /// </summary>
@@ -286,10 +270,40 @@ namespace HW8
 
             #endregion справочники
 
-
             Console.ReadKey();
 
+        }
 
+        public static void ChangeItemsDiagonal(int[,] multiArray)
+        {
+            for (int row = 0; row < multiArray.GetLength(0); row++)
+            {
+
+                // т.к. матрица квадратная, row передаем и как индекс
+                // строки и как индекс столбка
+                // "-1" - пишем, т.к. GetLength(0) возвращает длину
+                ReplaceItems(multiArray, row, row, multiArray.GetLength(0) - row - 1);
+
+            }
+        }
+
+        /// <summary>
+        /// Смена местави элементов
+        /// </summary>
+        /// <param name="multiArray">
+        /// массив для смены
+        /// </param>
+        /// <param name="firstColumnIndex">
+        /// индекс первого столбца для замены
+        /// </param>
+        /// <param name="RowIndex"> индекс строки для замены </param>
+        /// <param name="secondColumnIndex">  </param>
+        public static void ReplaceItems(int[,] multiArray, int RowIndex,
+                int firstColumnIndex,int secondColumnIndex)
+        {   
+            int tmp = multiArray[RowIndex, firstColumnIndex];
+            multiArray[RowIndex, firstColumnIndex] = multiArray[RowIndex, secondColumnIndex];
+            multiArray[RowIndex, secondColumnIndex] = tmp;
         }
 
         /// <summary>
@@ -776,6 +790,37 @@ namespace HW8
             return 0;
         }
 
-        //public static void Replace
+        /// <summary>
+        /// печать многомерного массива
+        /// </summary>
+        /// <param name="printedArray"></param>
+        public static void PrintArray(int[,] printedArray)
+        {
+            #region banner
+
+            Console.WriteLine();
+            Console.WriteLine(new String('=', 50));
+
+            #endregion
+
+            for (int row = 0; row < printedArray.GetLength(0); row++)
+            {
+                for (int column = 0; column < printedArray.GetLength(1); column++)
+                {
+                    // если элемент массива отсутствует, т.е. равен нулю,
+                    // то печатаем пустой символ
+                    if (printedArray[row, column] == 0)
+                    {
+                        Console.Write("{0,10}", string.Empty);
+                    }
+                    else
+                    {
+                        Console.Write("{0,10}", printedArray[row, column]);
+                    }
+                }
+                Console.WriteLine();
+            }
+
+        }
     }
 }

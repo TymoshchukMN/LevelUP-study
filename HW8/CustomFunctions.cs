@@ -45,7 +45,9 @@ namespace HW8
 
             // инициализация многомерного массива
             int[,] multiArray = new int[ROW_COUNT, COLUMN_COUNT];
-            string fillingType = String.Empty;
+            
+            // переменная для хранениея типа заполнения массива 
+            string fillingType;
 
             #region Обработка массива по столбцам "← →"
 
@@ -162,6 +164,132 @@ namespace HW8
 
 
             Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Запуск третьей задачи (Помеять местами элементы 
+        /// основной и дополнительной диагонали в квадратной матрице)
+        /// </summary>
+        public static void LaunchTask3()
+        {
+            // инициализация многомерного массива
+            int[,] multiArray = new int[ROW_COUNT, COLUMN_COUNT];
+
+            // заполнение одномерного массива
+            // CommonCustomFunctions - библиотека классов
+            CommonCustomFunctions.FillArray(multiArray,
+                    CommonCustomFunctions.START_RANDOM_RANGE,
+                    CommonCustomFunctions.END_RANDOM_RANGE);
+
+            // печать одномерного массива
+            CommonCustomFunctions.PrintArray(multiArray);
+
+            // столбец до которого будет выполняться работа цикла
+            // в замене элементов диагонали
+            int centralColumn;
+
+            // если сзначения ((ROW_COUNT / 2.0) != ROW_COUNT / 2 
+            // не равны, то число дробное, поэтому столбец 
+            // centralColumn увеличиваем на 1
+            if ((ROW_COUNT / 2.0) != ROW_COUNT / 2)
+            {
+                // число дробное
+
+                centralColumn = (ROW_COUNT / 2) + 1;
+            }
+            else
+            {
+                // число НЕ дробное
+
+                centralColumn = (ROW_COUNT / 2);
+            }
+
+
+            Console.ReadKey();
+        }
+
+
+        /// <summary>
+        /// Запуск 4-й задачи (погодный агрегатор)
+        /// </summary>
+        public static void LaunchTask4()
+        {
+            // количество месяцев в агрегаторе
+            const ushort mounthCount = 12;
+
+            // количество часов в агрегаторе 24
+            const ushort hours = 24;
+
+            #region инициализация массива
+
+            EnumTypeWeather[][][] weatherAggregator = new EnumTypeWeather[mounthCount][][];
+
+            // переменная для хранения колчества дней в менсяце
+            ushort countDaysPerMoths;
+            Random rand = new Random();
+
+            for (int month = 0; month < mounthCount; month++)
+            {
+                // получаем количество дней в месяце
+                countDaysPerMoths = GetCountDays((EnumMonth)month + 1);
+
+                // задаем размерность второго "измерения"
+                // (колчество дней в месяце)
+                weatherAggregator[month] = new EnumTypeWeather[countDaysPerMoths][];
+
+                for (int day = 0; day < countDaysPerMoths; day++)
+                {
+                    // задаем размерность 3-го "измерения",
+                    // во всех случаях равен 24
+                    weatherAggregator[month][day] = new EnumTypeWeather[hours];
+                    for (int hour = 0; hour < hours; hour++)
+                    {
+                        // наполнение массива значениями
+                        weatherAggregator[month][day][hour] = (EnumTypeWeather)rand.Next(1, 30);
+                    }
+                }
+            }
+
+            #endregion
+
+            #region справочники
+
+            ushort windyDays = 0;
+
+            // среднее количество ветренных дней в менсяц
+            for (int month = 0; month < mounthCount; month++)
+            {
+                // получаем количество дней в месяце
+                countDaysPerMoths = GetCountDays((EnumMonth)month + 1);
+
+                for (int day = 0; day < countDaysPerMoths; day++)
+                {
+
+                    for (int hour = 0; hour < hours; hour++)
+                    {
+
+                        if (weatherAggregator[month][day][hour].HasFlag(EnumTypeWeather.windy))
+                        {
+                            ++windyDays;
+                            break;
+                        }
+
+                    }
+                }
+            }
+
+            // среднее количество ветренных дней в менсяц
+            Console.WriteLine("Общее количество ветренных дней в году\t {0}", windyDays);
+            windyDays = (ushort)(windyDays / mounthCount);
+
+            Console.WriteLine("Среднее колчиество ветренныз дней\t {0}", windyDays);
+
+            #endregion справочники
+
+
+            Console.ReadKey();
+
+
         }
 
         /// <summary>
@@ -609,14 +737,45 @@ namespace HW8
                 }
             }
         }
-
+       
         /// <summary>
-        /// Запуск 4-й задачи (погодный агрегатор)
+        /// Получаем количество дней в месяце
         /// </summary>
-        public static void LaunchTask4()
-        { 
-
+        /// <returns>
+        /// количество дней в месяце
+        /// </returns>
+        public static ushort GetCountDays(EnumMonth month)
+        {
+            switch (month)
+            {
+                case EnumMonth.January:
+                    return 31;
+                case EnumMonth.February:
+                    return 28;
+                case EnumMonth.March:
+                    return 31;
+                case EnumMonth.April:
+                    return 30;
+                case EnumMonth.May:
+                    return 31;
+                case EnumMonth.June:
+                    return 30;
+                case EnumMonth.July:
+                    return 31;
+                case EnumMonth.August:
+                    return 31;
+                case EnumMonth.September:
+                    return 30;
+                case EnumMonth.October:
+                    return 31;
+                case EnumMonth.November:
+                    return 30;
+                case EnumMonth.December:
+                    return 31;
+            }
+            return 0;
         }
-    
+
+        //public static void Replace
     }
 }

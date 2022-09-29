@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WeatherType.cs" />
+    <Compile Include="EnumMonth.cs" />
+    <Compile Include="EnumTypeWeather.cs" />
     <Compile Include="CustomFunctions.cs" />
     <Compile Include="EnumTasks.cs" />
     <Compile Include="Program.cs" />

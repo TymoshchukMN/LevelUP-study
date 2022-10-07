@@ -76,6 +76,17 @@ namespace HW8
 
             #endregion Обработка массива по столбцам "↓↑"
 
+            // Очищаем многомерный массив для последующего заполнения
+            Array.Clear(multiArray, 0, multiArray.Length);
+
+            #region обработка массива по диагоналям 
+
+            // вызов функции на заполнение многомерного массива по СТОЛБЦАМ
+            ProcessingArryByColumns(multiArray, simpleArray, ROW_COUNT, COLUMN_COUNT);
+
+            #endregion обработка массива по диагоналям 
+
+
             Console.ReadKey();
         }
 
@@ -697,6 +708,51 @@ namespace HW8
             //    }
 
             //}
+        }
+
+        private static void ProcessingArrayByDiagonal(int[,] arrayForFilling, int[] simpleArray,
+                int rowCount, int columnCount)
+        {
+            // заполняем массива по дагоналям, запонение начинается с конца
+
+            // переменная определяющая направление заполнение по строкам
+            // 0b0 с права на лево, 0b1 с лева на право
+            byte columnFlag = 0b0;
+
+            int rowIndex;
+            int columnIndex;
+
+            // заполняем массива по диагонали, запонение начинается с конца
+            for (int i = simpleArray.Length - 1; i >= 0; i--)
+            {
+                // переменные для хранения идексов, 
+                // используемых, для заполнение многомерного массива
+                rowIndex = rowCount - 1;
+                columnIndex = columnCount - 1 ;
+
+                // последний элемент одномерного массива
+                // помещаем в конец двумерного
+                // _ _ _
+                // _ _ X
+                arrayForFilling[rowIndex, columnIndex] = simpleArray[i];
+                
+                
+
+                if (columnFlag == 0b0)
+                {
+                    --rowIndex;
+                    arrayForFilling[rowIndex, columnIndex] = simpleArray[i];
+                    
+                    --i;
+                }
+
+            }
+        }
+
+
+        private static void FillArrayByDiagonal(int[,] arrayForFilling, int[] simpleArray, int rowCount)
+        { 
+
         }
 
         /// <summary>

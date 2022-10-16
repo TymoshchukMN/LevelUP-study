@@ -43,11 +43,25 @@ namespace HW8
             CommonCustomFunctions.PrintArray(simpleArray);
 
 
+
             // инициализация многомерного массива
             int[,] multiArray = new int[ROW_COUNT, COLUMN_COUNT];
             
             // переменная для хранениея типа заполнения массива 
             string fillingType;
+
+
+
+            #region test
+
+            ProcessingArrayByDiagonal(multiArray, simpleArray, ROW_COUNT, COLUMN_COUNT);
+
+
+            Console.WriteLine("+++++++++++++++++++++++++++++++++++++");
+            Console.ReadKey();
+            #endregion
+
+
 
             #region Обработка массива по столбцам "← →"
 
@@ -81,8 +95,16 @@ namespace HW8
 
             #region обработка массива по диагоналям 
 
-            // вызов функции на заполнение многомерного массива по СТОЛБЦАМ
-            ProcessingArryByColumns(multiArray, simpleArray, ROW_COUNT, COLUMN_COUNT);
+            // вызов функции на заполнение многомерного массива по ДИАГОНАЛИ
+
+            #region test
+
+            //ProcessingArrayByDiagonal(multiArray, simpleArray, ROW_COUNT, COLUMN_COUNT);
+
+
+            #endregion
+
+            //ProcessingArrayByDiagonal(multiArray, simpleArray, ROW_COUNT, COLUMN_COUNT);
 
             #endregion обработка массива по диагоналям 
 
@@ -663,51 +685,7 @@ namespace HW8
 
             }
 
-            //// проход по "строкам"
-            ////for (int row = rowCount - 1; row >= 0; row--)
-            //{
-
-            //    // проверка направления движения
-            //    // 0b0 снизу в верх
-            //    // 0b1 сверху вниз
-
-            //    if (rowFlag == 0b0)
-            //    {
-            //        // проход по столбцам с права на лево
-            //        for (int column = columnCount - 1; column >= 0; column--)
-            //        {
-            //            arrayForFilling[row, column] = simpleArray[i];
-
-            //            // уменьшаем итератор цикла по перебору
-            //            // элементов одномерного массива
-            //            if (i == 0)
-            //            {
-            //                break;
-            //            }
-            //            --i;
-            //        }
-
-            //        // меняем флаг для смены направления обработки строк
-            //        // следующая обработка пойдет снизу в верх
-            //        rowFlag = (byte)~rowFlag;
-            //    }
-            //    else
-            //    {
-            //        // проход по столбцам с лева на право
-            //        for (int column = 0; column < columnCount; column++)
-            //        {
-            //            arrayForFilling[row, column] = simpleArray[i];
-
-            //            // уменьшаем итератор цикла по перебору
-            //            // элементов одномерного массива
-            //            --i;
-            //        }
-            //        // меняем флаг для смены направления обработки строк
-            //        // следующая обработка пойдет снизу в верх
-            //        rowFlag = (byte)~rowFlag;
-            //    }
-
-            //}
+           
         }
 
         private static void ProcessingArrayByDiagonal(int[,] arrayForFilling, int[] simpleArray,
@@ -715,44 +693,267 @@ namespace HW8
         {
             // заполняем массива по дагоналям, запонение начинается с конца
 
-            // переменная определяющая направление заполнение по строкам
-            // 0b0 с права на лево, 0b1 с лева на право
-            byte columnFlag = 0b0;
-
+            // переменные для хранения идексов, 
+            // используемых, для заполнение многомерного массива
             int rowIndex;
             int columnIndex;
 
+            rowIndex = rowCount - 1;
+            columnIndex = columnCount - 1;
+
+            // последний элемент одномерного массива
+            // помещаем в конец двумерного
+            // _ _ _
+            // _ _ X
+            arrayForFilling[rowIndex, columnIndex] = simpleArray[simpleArray.Length - 1];
+
+            --columnIndex;
+
             // заполняем массива по диагонали, запонение начинается с конца
-            for (int i = simpleArray.Length - 1; i >= 0; i--)
+            for (int i = simpleArray.Length - 2; i >= 0; i--)
             {
-                // переменные для хранения идексов, 
-                // используемых, для заполнение многомерного массива
-                rowIndex = rowCount - 1;
-                columnIndex = columnCount - 1 ;
-
-                // последний элемент одномерного массива
-                // помещаем в конец двумерного
                 // _ _ _
-                // _ _ X
-                arrayForFilling[rowIndex, columnIndex] = simpleArray[i];
-                
-                
-
-                if (columnFlag == 0b0)
+                // _ _ _
+                // _ x _
+                if (rowIndex == rowCount - 1 && columnIndex != 0 )
                 {
-                    --rowIndex;
-                    arrayForFilling[rowIndex, columnIndex] = simpleArray[i];
-                    
-                    --i;
+                    // двигаемся снизу вверх
+                    do
+                    {
+                        arrayForFilling[rowIndex, columnIndex] = simpleArray[i];
+
+                        CommonCustomFunctions.PrintArray(arrayForFilling, "ДИАГОНАЛЬ снизу вверх");
+
+                        // _ _ _   _ _ _
+                        // _ x _ → _ _ x
+                        // _ _ _   _ _ _
+                        if (columnIndex + 1 != columnCount)
+                        {
+                            ++columnIndex;
+                        }
+                        else
+                        {                            
+                            break;
+                        }
+
+                        // _ _ _   _ _ _
+                        // _ _ _ → _ x _
+                        // _ x _   _ _ _                        
+                        if (rowIndex - 1 >= 0)
+                        {
+                            --rowIndex;
+                        }
+
+                        // уменьшаем итератор одномерного массива
+                        --i;
+
+                    } while (columnIndex < columnCount);
+
+                    // увеличиваем итератор на 1, т.к. в цикле с пост условием
+                    // итератор может быть уменьшен, но второй раз в цикл не зайти
+                    // и i-й элемент не будет использоваться, т.к. в основном цикле
+                    // будет уменьшен еще на 1
+                    //++i;
                 }
+                else
+                {
+                    // _ _ _
+                    // _ _ x
+                    // _ _ _
+                    if (columnIndex == columnCount - 1 && rowIndex - 1 >=0)
+                    {
+                        // _ _ _   _ _ _
+                        // _ _ _   _ _ x
+                        // _ _ x → _ _ _
+                        // _ _ _   _ _ _
+                        --rowIndex;
+                        
+                        do
+                        {
+                            arrayForFilling[rowIndex, columnIndex] = simpleArray[i];
+                            CommonCustomFunctions.PrintArray(arrayForFilling, "ДИАГОНАЛЬ cверху вниз");
 
+                            if (rowIndex + 1 != rowCount)
+                            {
+                                // _ _ _   _ _ _
+                                // _ _ x   _ _ _
+                                // _ _ _ → _ _ x
+                                // _ _ _   _ _ _
+                                ++rowIndex;
+                            }
+                            else
+                            {
+                                // _ _ _   _ _ _
+                                // _ _ _   _ _ _ 
+                                // _ _ x → _ x _
+                                // _ _ _   _ _ _
+                                if (columnIndex - 1 >= 0)
+                                {
+                                    --columnIndex;
+                                }                                
+                                
+                                break;
+                            }
+
+                            // _ _ _   _ _ _
+                            // _ _ _   _ _ _ 
+                            // _ _ x → _ x _
+                            // _ _ _   _ _ _
+                            --columnIndex;
+
+                            // уменьшаем итератор одномерного массива
+                            --i;
+
+                        } while (rowIndex < rowCount);
+
+                    }
+                    else
+                    {
+                        // _ _ _
+                        // _ _ _
+                        // _ _ _
+                        // x _ _
+                        if (rowIndex == rowCount - 1 && columnIndex == 0)
+                        {
+                            // _ _ _   _ _ _
+                            // _ _ _   _ _ _
+                            // _ _ _ → x _ _
+                            // x _ _   _ _ _
+                            --rowIndex;                            
+
+                            // ДИАГОНАЛЬ снизу вверх
+                            do
+                            {
+                                arrayForFilling[rowIndex, columnIndex] = simpleArray[i];
+                                CommonCustomFunctions.PrintArray(arrayForFilling,
+                                        "ДИАГОНАЛЬ снизу вверх");
+
+                                if (rowIndex - 1 >= 0)
+                                {
+                                    // _ _ _   _ _ _
+                                    // _ _ _   x _ _ 
+                                    // x _ _ → _ _ _
+                                    // _ _ _   _ _ _
+                                    --rowIndex;
+                                }
+                                else
+                                {
+                                    break;
+                                }
+
+                                // _ _ _   _ _ _
+                                // x _ _   _ x _
+                                // _ _ _ → _ _ _
+                                // _ _ _   _ _ _
+                                ++columnIndex;
+
+                                // уменьшаем итератор одномерного массива
+                                --i;
+
+                            } while (rowIndex >= 0);
+
+                        }
+                        else
+                        {
+                            if (rowIndex == 0 && columnIndex != columnCount - 1)
+                            {
+                                // _ _ x _   _ x _ _
+                                // _ _ _ _   _ _ _ _
+                                // _ _ _ _ → _ _ _ _
+                                // _ _ _ _   _ _ _ _
+                                --columnIndex;
+                                do
+                                {
+                                    arrayForFilling[rowIndex, columnIndex] = simpleArray[i];
+                                    CommonCustomFunctions.PrintArray(arrayForFilling,
+                                            "ДИАГОНАЛЬ сверху вниз");
+
+                                    if (columnIndex - 1 >= 0)
+                                    {
+                                        // _ _ x _   _ x _ _
+                                        // _ _ _ _ → _ _ _ _
+                                        // _ _ _ _   _ _ _ _
+                                        --columnIndex;
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
+
+                                    // _ x _ _   _ _ _ _
+                                    // _ _ _ _   _ x _ _
+                                    // _ _ _ _ → _ _ _ _
+                                    // _ _ _ _   _ _ _ _
+                                    ++rowIndex;
+
+                                    --i;
+
+                                } while (columnIndex >= 0);
+                            }
+                            else
+                            {
+                                // _ _ _ _
+                                // _ _ _ _
+                                // x _ _ _
+                                // _ _ _ _
+                                if (columnIndex == 0 && rowIndex != rowCount - 1)
+                                {
+                                    // _ _ _ _   _ _ _ _
+                                    // _ _ _ _   x _ _ _
+                                    // x _ _ _ → _ _ _ _
+                                    // _ _ _ _   _ _ _ _
+                                    --rowIndex;
+                                    do
+                                    {
+                                        arrayForFilling[rowIndex, columnIndex] = simpleArray[i];
+                                        CommonCustomFunctions.PrintArray(arrayForFilling,
+                                                "ДИАГОНАЛЬ снизу вверх");
+                                        if (rowIndex - 1 >= 0)
+                                        {
+                                            // _ _ _ _   x _ _ _
+                                            // x _ _ _   _ _ _ _
+                                            // _ _ _ _ → _ _ _ _
+                                            // _ _ _ _   _ _ _ _
+                                            --rowIndex;
+                                        }
+                                        else
+                                        {
+                                            // _ x _ _   x _ _ _
+                                            // _ _ _ _ → _ _ _ _
+                                            // _ _ _ _   _ _ _ _
+                                            --columnIndex;
+                                            
+                                            // x _ _ _
+                                            // _ _ _ _
+                                            // _ _ _ _
+                                            if (rowIndex == 0 && columnIndex == 0)
+                                            {
+                                                arrayForFilling[rowIndex, columnIndex] = simpleArray[--i];
+                                                CommonCustomFunctions.PrintArray(arrayForFilling,
+                                                        "ДИАГОНАЛЬ снизу вверх");
+
+                                            }
+                                            break;
+                                        }
+
+                                        // x _ _ _   _ x _ _
+                                        // _ _ _ _ → _ _ _ _
+                                        // _ _ _ _   _ _ _ _
+                                        ++columnIndex;
+
+                                        --i;
+                                    } while (rowIndex >= 0);
+                                }
+                                else
+                                {
+                                    
+                                }
+                            }
+                        }
+                    }               
+                
+                } 
             }
-        }
-
-
-        private static void FillArrayByDiagonal(int[,] arrayForFilling, int[] simpleArray, int rowCount)
-        { 
-
         }
 
         /// <summary>

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5A798DE5-4589-411E-91BE-A90548B9DD1D}</ProjectGuid>
+    <ProjectGuid>{A2E983A7-A953-41B3-A76A-69396034BB2C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>HW8</RootNamespace>
-    <AssemblyName>HW8</AssemblyName>
+    <RootNamespace>FillByDiagonal</RootNamespace>
+    <AssemblyName>FillByDiagonal</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bogus, Version=34.0.2.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Bogus.34.0.2\lib\net40\Bogus.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,23 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnumExample.cs" />
-    <Compile Include="EnumMonth.cs" />
-    <Compile Include="EnumTypeWeather.cs" />
-    <Compile Include="CustomFunctions.cs" />
-    <Compile Include="EnumTasks.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CustomClass\CustomClass.csproj">
-      <Project>{f1c841bf-dfa1-46f4-af78-cc3689b478d7}</Project>
-      <Name>CustomClass</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

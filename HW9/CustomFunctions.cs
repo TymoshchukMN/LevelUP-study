@@ -289,6 +289,7 @@ namespace HW9
             }
 
         }
+
         /// <summary>
         /// Addition marks and resize array
         /// </summary>
@@ -308,6 +309,7 @@ namespace HW9
 
             //marksArray[marksArray.Length - 1] = mark;
         }
+
         static private void  ClearCurrentConsoleLine()
         {
             int currentLineCursor = Console.CursorTop;

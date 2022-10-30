@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5607E913-E240-484D-98BA-E537AE115441}</ProjectGuid>
+    <ProjectGuid>{EF6929FC-2DE1-42FA-B677-256F9D3D7BA3}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>HW2</RootNamespace>
-    <AssemblyName>HW2</AssemblyName>
+    <RootNamespace>HW_10</RootNamespace>
+    <AssemblyName>HW_10</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -48,8 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomFunctions.cs" />
+    <Compile Include="GroupNames.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StudentCard.cs" />
+    <Compile Include="StudentsGroup.cs" />
+    <Compile Include="UI.cs" />
+    <Compile Include="CRUD.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

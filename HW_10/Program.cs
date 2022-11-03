@@ -389,7 +389,6 @@ namespace HW_10
                         groups[choisedGroup].DeleteStudent(recordBook,
                             out operationResult);
 
-
                         if (operationResult == ResultCodes.success)
                         {
                             UI.PrintSucess();

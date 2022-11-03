@@ -49,9 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomFunctions.cs" />
+    <Compile Include="FieldForChange.cs" />
     <Compile Include="GroupNames.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultCodes.cs" />
     <Compile Include="StudentCard.cs" />
     <Compile Include="StudentsGroup.cs" />
     <Compile Include="UI.cs" />

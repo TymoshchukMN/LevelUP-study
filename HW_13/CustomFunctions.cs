@@ -82,42 +82,110 @@ namespace HW_13
         /// <param name="triangle">
         /// треугольник для изменения
         /// </param>
+        /// <param name="rotator"> 
+        /// градусы на которые нужно вращать фигуру
+        /// </param>
         public static void ClearTriangle(Triangle triangle)
         {
 
             int oldLeft = Console.CursorLeft;
             int oldTop = Console.CursorTop;
 
-            //Triangle triangle = new Triangle(triangle);
-
             int tmpLeft = triangle.X;
             int tmpTop = triangle.Y;
 
-            for (int i = 0; i < triangle.Cathetus1; i++)
+            switch (triangle.Rotator)
             {
-                if (i == 0)
-                {
-                    Console.SetCursorPosition(tmpLeft, tmpTop);
-                    Console.Write(" ");
-                }
-                else
-                {
-                    ++tmpTop;
-                    Console.SetCursorPosition(tmpLeft, tmpTop);
-                    Console.Write(" ");
-                    Console.SetCursorPosition(tmpLeft + i, tmpTop);
-                    Console.Write(" ");
-                }
+                case RotatorEnum.none:
+
+                    for (ushort i = 0; i < triangle.Cathetus1; i++)
+                    {
+                        if (i == 0)
+                        {
+                            Console.SetCursorPosition(tmpLeft, tmpTop);
+                            Console.Write(" ");
+                        }
+                        else
+                        {
+                            ++tmpTop;
+                            Console.SetCursorPosition(tmpLeft, tmpTop);
+                            Console.Write(" ");
+                            Console.SetCursorPosition(tmpLeft + i, tmpTop);
+                            Console.Write(" ");
+                        }
+                    }
+
+                    tmpLeft = triangle.X;
+                    tmpTop = Console.CursorTop;
+
+                    for (ushort i = 0; i < triangle.Cathetus2; i++)
+                    {
+                        Console.SetCursorPosition(tmpLeft + i, tmpTop);
+                        Console.Write(" ");
+                    }
+
+                    break;
+
+                case RotatorEnum.rotate_90:
+
+                    for (int i = 0; i < triangle.Cathetus1; i++)
+                    {
+                        Console.SetCursorPosition(tmpLeft, tmpTop);
+                        Console.Write(" ");
+
+                        ++tmpLeft;
+                    }
+
+                    tmpLeft = triangle.X;
+
+                    for (int i = 0; i <= triangle.Cathetus2; i++)
+                    {
+                        ++tmpTop;
+                        Console.SetCursorPosition(tmpLeft, tmpTop);
+                        Console.Write(" ");
+                        Console.SetCursorPosition(tmpLeft + triangle.Cathetus1 - i - 2, tmpTop);
+                        Console.Write(" ");
+                    }
+
+                    break;
+
+                case RotatorEnum.rotate_180:
+
+                    for (int i = 0; i < triangle.Cathetus2; i++)
+                    {
+                        Console.SetCursorPosition(tmpLeft, tmpTop);
+                        Console.Write(" ");
+
+                        ++tmpLeft;
+                    }
+
+                    tmpLeft = triangle.X;
+
+                    for (int i = 0; i <= triangle.Cathetus1; i++)
+                    {
+                        ++tmpTop;
+                        int rightSide = triangle.X
+                            + triangle.Cathetus1 - 1;
+                        Console.SetCursorPosition(rightSide, tmpTop);
+
+                        Console.Write(" ");
+
+                        tmpLeft = triangle.X + i + 1;
+
+                        if (tmpLeft < rightSide)
+                        {
+                            Console.SetCursorPosition(tmpLeft, tmpTop);
+                            Console.Write(" ");
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+
+                    break;
             }
 
-            tmpLeft = triangle.X;
-            tmpTop = Console.CursorTop;
-
-            for (int i = 0; i < triangle.Cathetus2; i++)
-            {
-                Console.SetCursorPosition(tmpLeft + i, tmpTop);
-                Console.Write(" ");
-            }
         }
 
         /// <summary>
@@ -131,13 +199,12 @@ namespace HW_13
             int oldLeft = Console.CursorLeft;
             int oldTop = Console.CursorTop;
 
-            //Rhombus rhombus = new Rhombus(rhombus);
-
             Console.SetCursorPosition(rhombus.X, rhombus.Y);
 
             int tmpLeft = rhombus.X;
             int tmpTop = rhombus.Y;
 
+           
             for (int i = 0; i < rhombus.Height / 2; i++)
             {
                 Console.SetCursorPosition(tmpLeft, tmpTop);
@@ -166,13 +233,13 @@ namespace HW_13
             }
 
             for (int i = 0; i <= rhombus.Height / 2; i++)
-            {
-                Console.SetCursorPosition(tmpLeft, tmpTop);
-                Console.Write((char)0);
-                --tmpLeft;
-                ++tmpTop;
-            }
-        }
-    
+                    {
+                        Console.SetCursorPosition(tmpLeft, tmpTop);
+                        Console.Write((char)0);
+                        --tmpLeft;
+                        ++tmpTop;
+                    }
+
+        }    
     }
 }

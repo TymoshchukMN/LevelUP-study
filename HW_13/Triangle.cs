@@ -27,6 +27,11 @@ namespace HW_13
         /// </summary>
         private ushort _angle;
 
+        /// <summary>
+        /// Полождение "по вращению"
+        /// </summary>
+        private RotatorEnum _rotator;
+
         #endregion FIELDS
 
         #region Properties
@@ -57,6 +62,13 @@ namespace HW_13
             get { return _angle; }
             set { _angle = value; }
         }
+              
+
+        public RotatorEnum Rotator
+        {
+            get { return _rotator; }
+            set { _rotator = value; }
+        }
 
         #endregion Properties
 
@@ -74,6 +86,7 @@ namespace HW_13
         {
             _cathetus1 = cathetus1;
             _cathetus2 = cathetus2;
+            _rotator = RotatorEnum.none;
         }
 
         public Triangle(Triangle triangle)
@@ -81,6 +94,7 @@ namespace HW_13
         {
             _cathetus1 = triangle._cathetus1;
             _cathetus2 = triangle._cathetus2;
+            _rotator = triangle.Rotator;
         }
 
         #endregion КОНСТРУКТОР
@@ -104,6 +118,21 @@ namespace HW_13
             
             _cathetus2 = (int)(Math.Ceiling((double)(Cathetus2
                 * (Present / 100 + 1))));
+
+            UI.PrintFigures(new Triangle(this));
+        }
+
+        /// <summary>
+        /// вращение треугольника 
+        /// </summary>
+        /// <param name="rotator">
+        /// насколько вращать
+        /// </param>
+        public override void Rotate(RotatorEnum rotator)
+        {
+            CustomMethods.ClearTriangle(new Triangle(this));
+
+            _rotator = rotator;
 
             UI.PrintFigures(new Triangle(this));
         }

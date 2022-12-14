@@ -27,6 +27,8 @@ namespace HW_13
 
         #endregion КОНСТРУКТОР
 
-
+        public virtual void Rotate(RotatorEnum rotator)
+        { 
+        }
     }
 }

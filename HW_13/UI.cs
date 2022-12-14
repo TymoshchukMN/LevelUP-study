@@ -125,13 +125,11 @@ namespace HW_13
             int oldLeft = Console.CursorLeft;
             int oldTop = Console.CursorTop;
 
-            //Rhombus rhombus = new Rhombus(rhombus);
-
             Console.SetCursorPosition(rhombus.X, rhombus.Y);
 
             int tmpLeft = rhombus.X;
             int tmpTop = rhombus.Y;
-
+                       
             for (int i = 0; i < rhombus.Height / 2; i++)
             {
                 Console.SetCursorPosition(tmpLeft, tmpTop);
@@ -167,6 +165,7 @@ namespace HW_13
                 ++tmpTop;
             }
 
+
             Console.ForegroundColor = defColor;
             Console.SetCursorPosition(oldLeft, oldTop);
         }
@@ -184,30 +183,106 @@ namespace HW_13
             int tmpLeft = triangle.X;
             int tmpTop = triangle.Y;
 
-            for (int i = 0; i < triangle.Cathetus1; i++)
+            switch (triangle.Rotator)
             {
-                if (i == 0)
-                {
-                    Console.SetCursorPosition(tmpLeft, tmpTop);
-                    Console.Write("*");
-                }
-                else
-                {
-                    ++tmpTop;
-                    Console.SetCursorPosition(tmpLeft, tmpTop);
-                    Console.Write("*");
-                    Console.SetCursorPosition(tmpLeft + i, tmpTop);
-                    Console.Write("*");
-                }
-            }
+                case RotatorEnum.none:
 
-            tmpLeft = triangle.X;
-            tmpTop = Console.CursorTop;
+                    for (int i = 0; i < triangle.Cathetus1; i++)
+                    {
+                        if (i == 0)
+                        {
+                            Console.SetCursorPosition(tmpLeft, tmpTop);
+                            Console.Write("*");
+                        }
+                        else
+                        {
+                            ++tmpTop;
+                            Console.SetCursorPosition(tmpLeft, tmpTop);
+                            Console.Write("*");
+                            Console.SetCursorPosition(tmpLeft + i, tmpTop);
+                            Console.Write("*");
+                        }
+                    }
 
-            for (int i = 0; i < triangle.Cathetus2; i++)
-            {
-                Console.SetCursorPosition(tmpLeft + i, tmpTop);
-                Console.Write("*");
+                    tmpLeft = triangle.X;
+                    tmpTop = Console.CursorTop;
+
+                    for (int i = 0; i < triangle.Cathetus2; i++)
+                    {
+                        Console.SetCursorPosition(tmpLeft + i, tmpTop);
+                        Console.Write("*");
+                    }
+
+                    break;
+
+                case RotatorEnum.rotate_90:
+
+                    for (int i = 0; i < triangle.Cathetus1; i++)
+                    {
+                        Console.SetCursorPosition(tmpLeft, tmpTop);
+                        Console.Write("*");
+
+                        ++tmpLeft;
+                    }
+
+                    tmpLeft = triangle.X;
+
+                    for (int i = 0; i <= triangle.Cathetus2; i++)
+                    {
+                        ++tmpTop;
+                        Console.SetCursorPosition(triangle.X, tmpTop);
+                        Console.Write("*");
+
+                        tmpLeft = triangle.X + triangle.Cathetus1 - i - 2;
+
+                        if (tmpLeft > triangle.X)
+                        {
+                            Console.SetCursorPosition(tmpLeft, tmpTop);
+                            Console.Write("*");
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+
+                    break;
+                case RotatorEnum.rotate_180:
+
+                    for (int i = 0; i < triangle.Cathetus2; i++)
+                    {
+                        Console.SetCursorPosition(tmpLeft, tmpTop);
+                        Console.Write("*");
+
+                        ++tmpLeft;
+                    }
+
+                    tmpLeft = triangle.X;
+
+                    for (int i = 0; i <= triangle.Cathetus1; i++)
+                    {
+                        ++tmpTop;
+                        int rightSide = triangle.X
+                            + triangle.Cathetus1 - 1;
+                        Console.SetCursorPosition(rightSide, tmpTop);
+
+                        Console.Write("*");
+
+                        tmpLeft = triangle.X + i + 1;
+
+                        if (tmpLeft < rightSide)
+                        {
+                            Console.SetCursorPosition(tmpLeft, tmpTop);
+                            Console.Write("*");
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+
+                    break;
+
             }
 
             Console.SetCursorPosition(oldLeft, oldTop);
@@ -250,5 +325,7 @@ namespace HW_13
             Console.ForegroundColor = def;
             Console.SetCursorPosition(oldLeft, oldTop);
         }
+
+        
     }
 }

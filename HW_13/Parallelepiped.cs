@@ -26,7 +26,7 @@ namespace HW_13
 
         public override void Move(int deltaX, int deltaY)
         {
-
+            
         }
 
         public override void Resize(double Present)

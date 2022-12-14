@@ -15,6 +15,12 @@ namespace HW_13
         /// </summary>
         FlatFigures[] _figures;
 
+
+        public FlatFigures[] Figures
+        {
+            get { return _figures; }
+        }
+
         #region КОНСТРУКТОРЫ
 
         /// <summary>
@@ -36,15 +42,26 @@ namespace HW_13
         /// </summary>
         public void PrintPictures()
         {
-            for (int i = 0; i < _figures.Length; i++)
+            for (ushort i = 0; i < _figures.Length; i++)
             {
                 UI.PrintFigures(_figures[i]);
             }
         }
 
-        public virtual void Resize(FlatFigures[] figures)
-        { 
-        
+        public void Move(int deltaX, int deltaY)
+        {
+            for (ushort i = 0; i < Figures.Length; ++i)
+            {
+                Figures[i].Move(2,2);
+            }
+        }
+
+        public void Resize(double present)
+        {
+            for (ushort i = 0; i < Figures.Length; ++i)
+            {
+                Figures[i].Resize(present);
+            }
         }
     }
 }

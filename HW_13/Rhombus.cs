@@ -7,7 +7,14 @@ namespace HW_13
 {
     public class Rhombus : FlatFigures
     {
+        #region FIELDS
+
         private int _height;
+        private RotatorEnum _rotator;
+
+        #endregion FIELDS
+
+        #region PROPERTIES
 
         public int Height
         {
@@ -15,7 +22,16 @@ namespace HW_13
             set { _height = value; }
         }
 
-        
+        public RotatorEnum Rotator
+        {
+            get { return _rotator; }
+            set { _rotator = value; }
+        }
+
+
+        #endregion PROPERTIES
+
+
 
         public Rhombus(int x, int y, int height):
             base(x,y)
@@ -23,12 +39,14 @@ namespace HW_13
             _height = height;
         }
 
-
         public Rhombus(Rhombus rhombus):
             base(rhombus.X, rhombus.Y)
         {
             _height = rhombus.Height;
+            _rotator = rhombus.Rotator;
         }
+        
+        
         public override void Move(int deltaX, int deltaY)
         {
             CustomMethods.ClearRhombus(new Rhombus(this));
@@ -41,7 +59,14 @@ namespace HW_13
 
         public override void Resize(double Present)
         {
+            CustomMethods.ClearRhombus(new Rhombus(this));
 
+            _height = (int)(Math.Ceiling((double)(Height
+               * (Present / 100 + 1))));
+
+            UI.PrintFigures(new Rhombus(this));
         }
+
+      
     }
 }

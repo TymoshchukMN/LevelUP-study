@@ -1,12 +1,12 @@
 ﻿////////////////////////////////////////////
 // Author : Tymoshchuk Maksym
-// Created On : 03/11/2022
-// Last Modified On : 03/11/2022 
+// Created On : 17/11/2022
+// Last Modified On:
 // Description: list filds for change
-// Project: HW_10
+// Project: HW_11
 ////////////////////////////////////////////
 
-namespace HW_10
+namespace HW_11
 {
     /// <summary>
     /// поля для изменения
@@ -17,8 +17,7 @@ namespace HW_10
         firstName = 97,    // имя
         middleName = 98,   // отчество
         lastName = 99,     // фамилия
-        phoneNumber = 100,
-        address = 101,
-        email = 102
+        addressRegistration = 100,
+        addressResidential = 101
     }
 }

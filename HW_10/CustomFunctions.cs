@@ -1,17 +1,13 @@
 ﻿////////////////////////////////////////////
 // Author : Tymoshchuk Maksym
 // Created On : 25/10/2022
-// Last Modified On : 
+// Last Modified On : 04/11/2022
 // Description: custom functions
 // Project: HW_10
 ////////////////////////////////////////////
 
-
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace HW_10
 {
@@ -32,7 +28,7 @@ namespace HW_10
         /// <param name="countStudnts">
         /// количество студентов в группе по умолчанию
         /// </param>
-        public static void FillStudentsAuto(StudentCard[] students, 
+        public static void FillStudentsAuto(StudentCard[] students,
             ushort countStudnts)
         {
             string RB;
@@ -109,24 +105,33 @@ namespace HW_10
         /// <returns>
         /// index or error 
         /// </returns>
-        public static ushort GetGroupIndex(ConsoleKey groupNum)
+        public static ResultCodes GetGroupIndex(ConsoleKey groupNum,
+            out ushort choisedGroup, out ResultCodes operationResult)
         {
-            ushort gourpNum = 0;
+            choisedGroup = 0;
+            operationResult = ResultCodes.none;
 
             switch (groupNum)
             {
                 case ConsoleKey.NumPad1:
-                    gourpNum = 0;
+
+                    choisedGroup = 0;
+                    operationResult = ResultCodes.success;
+
                     break;
                 case ConsoleKey.NumPad2:
-                    gourpNum = 1;
+
+                    choisedGroup = 1;
+                    operationResult = ResultCodes.success;
+
                     break;
                 default:
-                    gourpNum = 1603;
+                    operationResult = ResultCodes.groupNotExist;
+                    choisedGroup = 1603;
                     break;
             }
 
-            return gourpNum;
+            return operationResult;
         }
 
         /// <summary>
@@ -158,7 +163,7 @@ namespace HW_10
                 for (int i = 0; i < recordBook.Length; i++)
                 {
                     // 2 - это количество букв в начале зачетки
-                    if (i < 2)
+                    if (i <= 1)
                     {
                         // в диапазоне от 65 до 90 содержаться
                         // коды символов букв от A до Z
@@ -334,16 +339,16 @@ namespace HW_10
         /// <param name="isCorrect">
         /// код корректности учетки
         /// </param>
-        /// <param name="isRBexist">
+        /// <param name="operationResult">
         /// код существующей учетки
         /// </param>
         /// <returns>
         /// номер учетки
         /// </returns>
-        public static string ProcessingNonexistentRB(ref StudentsGroup[] groups,
-                ushort choisedGroup, string recordBook, out ResultCodes isCorrect,
-                out ResultCodes isRBexist)
+        public static void ProcessingNonexistentRB(ref StudentsGroup[] groups,
+                ushort choisedGroup, ref string recordBook, out ResultCodes isCorrect)
         {
+            ResultCodes operationResult = ResultCodes.none;
             do
             {
                 UI.PrintErrorRBnotExist(recordBook);
@@ -359,9 +364,10 @@ namespace HW_10
 
                 } while (isCorrect != ResultCodes.success);
 
-                isRBexist = groups[choisedGroup][recordBook].IsContainRB(recordBook);
-            } while (isRBexist != ResultCodes.success);
-            return recordBook;
+                groups[choisedGroup][recordBook].IsContainRB(recordBook, out operationResult);
+            } while (operationResult != ResultCodes.success);
+
+            //return recordBook;
         }
 
         /// <summary>
@@ -401,7 +407,7 @@ namespace HW_10
             {
                 operationResult = ResultCodes.success;
             }
-           
+
             return operationResult;
         }
 
@@ -420,7 +426,7 @@ namespace HW_10
         /// <returns>
         /// код резульатат
         /// </returns>
-        public static ResultCodes ChangeField(ref StudentsGroup [] group, 
+        public static ResultCodes ChangeField(ref StudentsGroup[] group,
                 ushort choisedGroup, string recordBook,
                 FieldForChange field, string newVol, out ResultCodes operationResult)
         {
@@ -431,7 +437,7 @@ namespace HW_10
             switch (field)
             {
                 case FieldForChange.firstName:
-                    
+
                     temCard.firstName = newVol;
                     group[choisedGroup][recordBook] = temCard;
                     operationResult = ResultCodes.success;
@@ -481,30 +487,5 @@ namespace HW_10
 
             return operationResult;
         }
-
-
-        public static ResultCodes DeleteStudent(ref StudentsGroup[] group,
-               ushort choisedGroup, string recordBook,
-               out ResultCodes operationResult)
-        {
-            operationResult = ResultCodes.none;
-
-            ushort lastIndex = group[choisedGroup].GetCountStudents();
-            
-            // получаем индекс карточки студениа к удалению
-            group[choisedGroup].GetStudentIndex(recordBook);
-
-            // сохраняем последнюю в массиве карточку
-            StudentCard temCard = group[choisedGroup][lastIndex];
-
-            group[choisedGroup][recordBook] = temCard;
-
-            //var a = group[choisedGroup];
-
-            //Array.Resize(ref group[choisedGroup], group[choisedGroup].GetCountStudents() - 1);
-
-            return operationResult;
-        }
     }
-
 }

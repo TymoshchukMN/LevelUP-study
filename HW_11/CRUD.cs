@@ -1,13 +1,13 @@
 ﻿////////////////////////////////////////////
 // Author : Tymoshchuk Maksym
-// Created On : 25/10/2022
+// Created On : 17/11/2022
 // Last Modified On : 
 // Description: Enum CRUD operations
-// Project: HW_10
+// Project: HW_11
 ////////////////////////////////////////////
 
 
-namespace HW_10
+namespace HW_11
 {
     /// <summary>
     /// CRUD

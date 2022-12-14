@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HW_10
 {
@@ -10,10 +6,10 @@ namespace HW_10
     {
         static void Main(string[] args)
         {
+
             const ushort COUNT_GROUPS = 2;
             const ushort INDEX_FINANCE_GROUP = 0;
             const ushort INDEX_MATH_GROUP = 1;
-            const ushort ERROR_RUNTIME = 1603;
 
             StudentsGroup[] groups = new StudentsGroup[COUNT_GROUPS];
 
@@ -36,21 +32,26 @@ namespace HW_10
                 UI.PrintRequestGroup();
 
                 ConsoleKey groupNum = Console.ReadKey().Key;
+                ResultCodes operationResult = ResultCodes.none;
+                
+                ushort choisedGroup;
 
-                ushort choisedGroup = CustomFunctions.GetGroupIndex(groupNum);
+
+                CustomFunctions.GetGroupIndex(groupNum,
+                    out choisedGroup, out operationResult);
 
                 Console.Clear();
 
-                if (choisedGroup == ERROR_RUNTIME)
+                if (operationResult == ResultCodes.groupNotExist)
                 {
                     do
                     {
                         UI.PrintErrorSelectedGroup();
 
-                        choisedGroup = CustomFunctions.GetGroupIndex(
-                                Console.ReadKey().Key);
+                        CustomFunctions.GetGroupIndex(Console.ReadKey().Key,
+                            out choisedGroup, out operationResult);
 
-                    } while (choisedGroup == ERROR_RUNTIME);
+                    } while (operationResult == ResultCodes.groupNotExist);
                 }
 
                 Console.Clear();
@@ -79,7 +80,7 @@ namespace HW_10
 
                         UI.PrintRequestDataForNewStudent();
 
-                        ResultCodes operationResult = ResultCodes.none;
+
 
                         #region firstName
 
@@ -224,7 +225,7 @@ namespace HW_10
                         }
                         else
                         {
-                            if(operationResult == ResultCodes.exeptionStudentGroup)
+                            if (operationResult == ResultCodes.exeptionStudentGroup)
                             {
                                 UI.PrintErrorAddingStudent();
                             }
@@ -245,25 +246,23 @@ namespace HW_10
 
                         recordBook = Console.ReadLine();
 
-                        isCorrect = ResultCodes.none;
+                        //isCorrect = ResultCodes.none;
 
                         CustomFunctions.IsRecordBookCorrect(recordBook,
-                                out isCorrect);
+                                out operationResult);
 
                         CustomFunctions.ProcessingWrongRB(ref recordBook,
-                                ref isCorrect);
-
-                        ResultCodes isRBexist = ResultCodes.none;
+                                ref operationResult);
 
                         //  ============= INDEXATOR
 
-                        isRBexist = groups[choisedGroup][recordBook].IsContainRB(recordBook);
+                        groups[choisedGroup][recordBook].IsContainRB(recordBook,
+                            out operationResult);
 
-                        if (isRBexist != ResultCodes.success)
+                        if (operationResult != ResultCodes.success)
                         {
-                            recordBook = CustomFunctions.ProcessingNonexistentRB(ref groups,
-                                choisedGroup, recordBook, out isCorrect,
-                                out isRBexist);
+                            CustomFunctions.ProcessingNonexistentRB(ref groups,
+                                choisedGroup, ref recordBook, out operationResult);
                         }
 
                         groups[choisedGroup][recordBook].PrintFullStudentInfo();
@@ -284,7 +283,7 @@ namespace HW_10
 
                         recordBook = Console.ReadLine();
 
-                        isCorrect = ResultCodes.none;
+                        //isCorrect = ResultCodes.none;
 
                         CustomFunctions.IsRecordBookCorrect(recordBook,
                                 out isCorrect);
@@ -292,17 +291,15 @@ namespace HW_10
                         CustomFunctions.ProcessingWrongRB(ref recordBook,
                                 ref isCorrect);
 
-                        isRBexist = ResultCodes.none;
-
                         //  ============= INDEXATOR
 
-                        isRBexist = groups[choisedGroup][recordBook].IsContainRB(recordBook);
+                        groups[choisedGroup][recordBook].IsContainRB(recordBook,
+                            out operationResult);
 
-                        if (isRBexist != ResultCodes.success)
+                        if (operationResult != ResultCodes.success)
                         {
-                            recordBook = CustomFunctions.ProcessingNonexistentRB(ref groups,
-                                choisedGroup, recordBook, out isCorrect,
-                                out isRBexist);
+                            CustomFunctions.ProcessingNonexistentRB(ref groups,
+                                choisedGroup, ref recordBook, out operationResult);
                         }
 
                         #endregion processing RB from USER
@@ -311,11 +308,11 @@ namespace HW_10
 
                         FieldForChange fieldForChange = (FieldForChange)Console.ReadKey().Key;
 
-                        operationResult = CustomFunctions.IsFieldExist(fieldForChange,
+                        CustomFunctions.IsFieldExist(fieldForChange,
                             out operationResult);
-                        
+
                         if (operationResult != ResultCodes.success)
-                        {                            
+                        {
                             do
                             {
                                 UI.ClearPreviousConsoleLine();
@@ -323,7 +320,7 @@ namespace HW_10
 
                                 fieldForChange = (FieldForChange)Console.ReadKey().Key;
 
-                                operationResult = CustomFunctions.IsFieldExist(fieldForChange,
+                                CustomFunctions.IsFieldExist(fieldForChange,
                                     out operationResult);
 
                             } while (operationResult != ResultCodes.success);
@@ -332,10 +329,13 @@ namespace HW_10
                         groups[choisedGroup][recordBook].PrintFullStudentInfo();
 
                         UI.RequestNewVol();
-                        string newVol = Console.ReadLine();
 
-                        CustomFunctions.ChangeField(ref groups, choisedGroup, recordBook,
-                            fieldForChange, newVol, out operationResult);
+                        // новое значение в поле студента
+                        string newVolInStudentField = Console.ReadLine();
+
+                        CustomFunctions.ChangeField(ref groups, choisedGroup,
+                            recordBook, fieldForChange, newVolInStudentField,
+                            out operationResult);
 
                         if (operationResult == ResultCodes.success)
                         {
@@ -349,7 +349,7 @@ namespace HW_10
 
                         #endregion UPDATE
 
-                        break;                    
+                        break;
 
                     case CRUD.delete:
 
@@ -363,25 +363,21 @@ namespace HW_10
 
                         recordBook = Console.ReadLine();
 
-                        isCorrect = ResultCodes.none;
-
                         CustomFunctions.IsRecordBookCorrect(recordBook,
-                                out isCorrect);
+                                out operationResult);
 
                         CustomFunctions.ProcessingWrongRB(ref recordBook,
-                                ref isCorrect);
-
-                        isRBexist = ResultCodes.none;
+                                ref operationResult);
 
                         //  ============= INDEXATOR
 
-                        isRBexist = groups[choisedGroup][recordBook].IsContainRB(recordBook);
+                        groups[choisedGroup][recordBook].IsContainRB(recordBook,
+                            out operationResult);
 
-                        if (isRBexist != ResultCodes.success)
+                        if (operationResult != ResultCodes.success)
                         {
-                            recordBook = CustomFunctions.ProcessingNonexistentRB(ref groups,
-                                choisedGroup, recordBook, out isCorrect,
-                                out isRBexist);
+                            CustomFunctions.ProcessingNonexistentRB(ref groups,
+                                choisedGroup, ref recordBook, out operationResult);
                         }
 
                         #endregion processing RB from USER
@@ -403,9 +399,88 @@ namespace HW_10
                         #endregion
 
                         break;
+
                     case CRUD.move:
-                        break;
-                    default:
+
+
+                        #region MOVE
+
+                        // найти кого двинуть
+                        // выбор куда
+                        // проверка можно ли добавить в целевую группу
+
+                        groups[choisedGroup].ListStudentsInGroup();
+
+                        #region processing RB from USER
+
+                        UI.PrintRequestRBForMoving();
+
+                        recordBook = Console.ReadLine();
+
+                        CustomFunctions.IsRecordBookCorrect(recordBook,
+                                out operationResult);
+
+                        CustomFunctions.ProcessingWrongRB(ref recordBook,
+                                ref operationResult);
+
+                        //  ============= INDEXATOR
+
+                        groups[choisedGroup][recordBook].IsContainRB(recordBook,
+                            out operationResult);
+
+                        if (operationResult != ResultCodes.success)
+                        {
+                            CustomFunctions.ProcessingNonexistentRB(ref groups,
+                                choisedGroup, ref recordBook, out operationResult);
+                        }
+
+                        #endregion processing RB from USER
+
+                        UI.PrintAvailabledGroupForMoving((GroupNames)choisedGroup);
+
+                        ConsoleKey targetGroupNum = Console.ReadKey().Key;
+                        ushort targetGroup;
+
+                        CustomFunctions.GetGroupIndex(targetGroupNum,
+                            out targetGroup, out operationResult);
+
+                        if (operationResult != ResultCodes.success)
+                        {
+                            do
+                            {
+                                UI.PrintErrorChoosingGroup();
+                                targetGroupNum = Console.ReadKey().Key;
+                                CustomFunctions.GetGroupIndex(targetGroupNum,
+                                    out targetGroup, out operationResult);
+
+                            } while (operationResult != ResultCodes.success);
+                        }
+
+                        groups[choisedGroup].IsMovingAvailable(out operationResult);
+
+                        if (operationResult != ResultCodes.addStudentAvailable)
+                        {
+                            UI.PrintErrorAddingStudent();
+                        }
+                        else
+                        {
+                            StudentCard studentCard = new StudentCard(
+                                groups[choisedGroup][recordBook].firstName,
+                                groups[choisedGroup][recordBook].middleName,
+                                groups[choisedGroup][recordBook].firstName,
+                                groups[choisedGroup][recordBook].phoneNumber,
+                                groups[choisedGroup][recordBook].address,
+                                groups[choisedGroup][recordBook].email,
+                                groups[choisedGroup][recordBook].recordBook
+                             );
+
+                            groups[targetGroup].AddStudent(studentCard);
+                            groups[choisedGroup].DeleteStudent(recordBook,
+                                out operationResult);
+                        }
+
+                        #endregion MOVE
+
                         break;
                 }
 
@@ -419,11 +494,8 @@ namespace HW_10
 
             } while (defConsoleKey != ConsoleKey.Escape);
 
-
-
             Console.ReadKey();
         }
 
-       
     }
 }

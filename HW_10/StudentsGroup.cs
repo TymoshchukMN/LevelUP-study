@@ -1,12 +1,13 @@
 ﻿////////////////////////////////////////////
 // Author : Tymoshchuk Maksym
 // Created On : 25/10/2022
-// Last Modified On : 
+// Last Modified On : 04/11/2022
 // Description: struct for containing students groups
 // Project: HW_10
 ////////////////////////////////////////////
 
 
+using Faker;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,12 +76,14 @@ namespace HW_10
             get
             {
                 StudentCard Card = new StudentCard();
+                ResultCodes operationResult = ResultCodes.none;
 
                 for (int i = 0; i < _studentCards.Count(); i++)
                 {
                     Card = _studentCards[i];
+                    Card.IsContainRB(index, out operationResult);
 
-                    if (Card.IsContainRB(index) == ResultCodes.success)
+                    if (operationResult == ResultCodes.success)
                     {
                         Card = _studentCards[i];
                         break;
@@ -92,15 +95,16 @@ namespace HW_10
             }
             set
             {
-                StudentCard Card = new StudentCard();
+                ResultCodes operationResult = ResultCodes.none;
 
                 for (int i = 0; i < _studentCards.Count(); i++)
                 {
-                    if (_studentCards[i].IsContainRB(index) == ResultCodes.success)
+                    _studentCards[i].IsContainRB(index, out operationResult);
+                    if (operationResult == ResultCodes.success)
                     {
                         _studentCards[i] = value;
                         break;
-                    }                  
+                    }
                 }
             }
         }
@@ -120,13 +124,9 @@ namespace HW_10
             {
                 return _studentCards[index];
             }
-            set 
-            {
-                /* set the specified index to value here */ 
-            
-            }
+
         }
-        
+
         #endregion INDEXATOR
 
         /// <summary>
@@ -151,7 +151,6 @@ namespace HW_10
             }
             return studentIndex;
         }
-
 
 
         /// <summary>
@@ -192,28 +191,38 @@ namespace HW_10
                 _studentCards[indexNewStudent].recordBook = recordBook;
 
                 operationResult = ResultCodes.success;
-            }            
+            }
 
             return operationResult;
         }
 
-        public ResultCodes DeleteStudent(string recordBook, out ResultCodes operationResult)
+        public void AddStudent(StudentCard card)
+        {
+            Array.Resize(ref _studentCards, _studentCards.Length + 1);
+
+            ushort indexNewStudent = (ushort)(_studentCards.Length - 1);
+
+            _studentCards[indexNewStudent] = card;
+        }
+
+        public ResultCodes DeleteStudent(string recordBook,
+            out ResultCodes operationResult)
         {
             operationResult = ResultCodes.none;
 
             ushort lastIndex = (ushort)(_studentCards.Count() - 1);
-            
+
             // сохраняем последнюю в массиве карточку
             StudentCard temCard = _studentCards[lastIndex];
-            
+
             // получаем индекс карточки студениа к удалению
             ushort indexStudetForChange = GetStudentIndex(recordBook);
 
             _studentCards[indexStudetForChange] = temCard;
             Array.Resize(ref _studentCards, _studentCards.Count() - 1);
             IsContainRB(recordBook, out operationResult);
-            
-               
+
+
 
             return operationResult;
         }
@@ -230,8 +239,8 @@ namespace HW_10
         /// <returns>
         /// код операции
         /// </returns>
-        private ResultCodes IsContainRB(string recordBook, 
-                out ResultCodes operationResult)
+        private ResultCodes IsContainRB(string recordBook,
+            out ResultCodes operationResult)
         {
             operationResult = ResultCodes.success;
 
@@ -269,9 +278,9 @@ namespace HW_10
                     $"{_studentCards[i].middleName} " +
                 $"{_studentCards[i].lastName}" +
                 $"\nRecordBook:\t");
-                
+
                 UI.PrintStritgOtherColor(_studentCards[i].recordBook, ConsoleColor.Green);
-                
+
                 Console.WriteLine("\n");
 
 
@@ -281,12 +290,20 @@ namespace HW_10
         /// <summary>
         /// Получаем количество студентов в группе
         /// </summary>
-        /// <returns></returns>
-        public ushort GetCountStudents()
+        /// <returns>
+        /// резульатат 
+        /// </returns>
+        public ResultCodes IsMovingAvailable(out ResultCodes operationResult)
         {
-            return (ushort)_studentCards.Count();
-        
-        }
+            operationResult = ResultCodes.addStudentAvailable;
 
+            if (_studentCards.Length + 1 >= MAX_COUNT_STUDENT)
+            {
+                operationResult = ResultCodes.exeptionStudentGroup;
+            }
+
+            return operationResult;
+        }
+                
     }
 }

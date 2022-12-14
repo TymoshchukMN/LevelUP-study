@@ -1,7 +1,7 @@
 ﻿////////////////////////////////////////////
 // Author : Tymoshchuk Maksym
 // Created On : 25/10/2022
-// Last Modified On : 
+// Last Modified On : 04/11/2022
 // Description: struct for containing student card
 // Project: WH_10
 ////////////////////////////////////////////
@@ -45,7 +45,7 @@ namespace HW_10
             _recordBook = recordBook;
         }
 
-      
+
         /// <summary>
         /// Свойство "зачетная книжка"
         /// </summary>
@@ -60,35 +60,35 @@ namespace HW_10
                 _recordBook = value;
             }
         }
-        
+
         /// <summary>
         /// имя пользователя
         /// </summary>
         public string firstName
         {
-            get 
+            get
             {
-                return _firstName; 
+                return _firstName;
             }
             set
             {
-                _firstName = value; 
+                _firstName = value;
             }
         }
 
         /// <summary>
         /// отчество
         /// </summary>
-        public string middleName 
+        public string middleName
         {
-            get 
+            get
             {
                 return _middleName;
             }
             set
             {
                 _middleName = value;
-            } 
+            }
         }
 
         public string lastName
@@ -153,11 +153,11 @@ namespace HW_10
                 $"email:\t\t{_email}\n" +
                 $"RecordBook:\t");
             UI.PrintStritgOtherColor(_recordBook, ConsoleColor.Green);
-            Console.WriteLine("\n{0}\n",BOARD);
+            Console.WriteLine("\n{0}\n", BOARD);
 
-        }   
+        }
 
-                
+
         /// <summary>
         /// Прверяем соответствеие учетки студента запрашиваемой
         /// </summary>
@@ -168,16 +168,16 @@ namespace HW_10
         /// true - соотвествует
         /// false - не соотвутствует
         /// </returns>
-        public ResultCodes IsContainRB(string recordBook)
+        public ResultCodes IsContainRB(string recordBook, out ResultCodes operationResult)
         {
-            ResultCodes isContainRB = ResultCodes.error;
+            operationResult = ResultCodes.error;
 
             if (_recordBook == recordBook)
             {
-                isContainRB = ResultCodes.success;
+                operationResult = ResultCodes.success;
             }
 
-            return isContainRB;
+            return operationResult;
         }
 
 

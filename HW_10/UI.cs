@@ -1,16 +1,12 @@
 ﻿////////////////////////////////////////////
 // Author : Tymoshchuk Maksym
 // Created On : 25/10/2022
-// Last Modified On : 
+// Last Modified On : 04/11/2022
 // Description: UI functions
 // Project: HW_10
 ////////////////////////////////////////////
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HW_10
 {
@@ -33,14 +29,14 @@ namespace HW_10
         /// </summary>
         public static void PrintRequestGroup()
         {
-            Console.WriteLine("Выберите группу:");
-
             ushort countGroups = (ushort)Enum.GetNames(typeof(GroupNames)).Length;
 
             for (ushort i = 0; i < countGroups; ++i)
             {
                 Console.Write($"\n{i + 1}. {(GroupNames)i}");
             }
+
+            Console.WriteLine("Выберите группу:");
         }
 
         /// <summary>
@@ -187,7 +183,7 @@ namespace HW_10
         /// Запрос phoneNumber пользователя
         /// </summary>
         public static void PrintRequestPhoneNumber()
-        {            
+        {
             Console.Write("phoneNumber:\t");
         }
 
@@ -221,7 +217,7 @@ namespace HW_10
         {
             const string SUCCESS_MESSAGE = "Operation saccesfull";
 
-            PrintStritgOtherColor(SUCCESS_MESSAGE,ConsoleColor.Green);
+            PrintStritgOtherColor(SUCCESS_MESSAGE, ConsoleColor.Green);
         }
 
         /// <summary>
@@ -235,8 +231,8 @@ namespace HW_10
 
             for (int i = 97; i < countFields + STEP_FOR_NUM_DIGIT_SYMBOL; i++)
             {
-                Console.WriteLine("{0}. {1}",i - STEP_FOR_NUM_DIGIT_SYMBOL, (FieldForChange)i);
-            }           
+                Console.WriteLine("{0}. {1}", i - STEP_FOR_NUM_DIGIT_SYMBOL, (FieldForChange)i);
+            }
         }
 
         public static void PrintErrorChoosingField()
@@ -277,7 +273,44 @@ namespace HW_10
         {
             Console.WriteLine("Укажите номер зачетки студента для удаления");
         }
-    
+
+        /// <summary>
+        /// перчать доступных групп к перемещению
+        /// </summary>
+        /// <param name="selectedGroup">
+        /// группа из которой выполняется перемещение
+        /// </param>
+        public static void PrintAvailabledGroupForMoving(GroupNames selectedGroup)
+        {
+            ushort countGroups = (ushort)Enum.GetNames(typeof(GroupNames)).Length;
+
+            Console.WriteLine("\nВыбериете группу для перемещения:\n");
+
+            for (int i = 0; i < countGroups; i++)
+            {
+                if (selectedGroup != (GroupNames)i)
+                {
+                    Console.Write("{0}. {1}", i + 1, (GroupNames)i);
+                }
+            }
+        }
+
+        /// <summary>
+        /// запрос целевой группы для перемещения
+        /// </summary>
+        public static void PrintRequestRBForMoving()
+        {
+            Console.WriteLine("Укажите номер зачетки студента для перемещения:");
+        }
+
+        /// <summary>
+        /// Печать ощшибки выбора группы для перемещения
+        /// </summary>
+        public static void PrintErrorChoosingGroup()
+        {
+            Console.WriteLine("\n\nНе верная группа для перемещения," +
+                "попробуйте еще раз");
+        }
     }
 
 }

@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="HW_13.Circle" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAIAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Circle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HW_13.CircleInSquare" Collapsed="true">
+    <Position X="7.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CircleInSquare.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HW_13.Figures" Collapsed="true">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAIQAAAAAAAAAAAAAAAAAAAAAAAAAAAEAYAA=</HashCode>
+      <FileName>Figures.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HW_13.FlatFigures">
+    <Position X="3.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FlatFigures.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HW_13.Parallelepiped">
+    <Position X="9.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABIDAACAAAAAAAEAAEBAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Parallelepiped.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HW_13.Pictures">
+    <Position X="13.5" Y="1.25" Width="1.5" />
+    <Members>
+      <Field Name="_figures" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAIAAAAAAAAACAAAAAAAAAAQAAAAAAAEAAAA=</HashCode>
+      <FileName>Pictures.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_figures" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Figures" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="HW_13.Rhombus" Collapsed="true">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABIDAACAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Rhombus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HW_13.Square" Collapsed="true">
+    <Position X="7.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAABAAAAAAAAABAAAAAEAAAA=</HashCode>
+      <FileName>Square.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HW_13.Triangle" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAIBAACAAAAAAAAAAEAAAACAAAEAAAAGABAA=</HashCode>
+      <FileName>Triangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HW_13.VolumetricFigures">
+    <Position X="9.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAE=</HashCode>
+      <FileName>VolumetricFigures.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

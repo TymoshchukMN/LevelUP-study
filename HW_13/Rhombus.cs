@@ -1,7 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿///////////////////////////////
+// Author : Tymoshchuk Maksym
+// Created On : 12/12/2022
+// Last Modified On : 
+// Description: Rhombus
+// Project: HW_13
+///////////////////////////////
+
+using System;
+
 
 namespace HW_13
 {
@@ -28,10 +34,9 @@ namespace HW_13
             set { _rotator = value; }
         }
 
-
         #endregion PROPERTIES
 
-
+        #region КОНСТРУКТОР
 
         public Rhombus(int x, int y, int height):
             base(x,y)
@@ -45,26 +50,27 @@ namespace HW_13
             _height = rhombus.Height;
             _rotator = rhombus.Rotator;
         }
-        
-        
+
+        #endregion КОНСТРУКТОР
+
         public override void Move(int deltaX, int deltaY)
         {
-            CustomMethods.ClearRhombus(new Rhombus(this));
+            UI.PrintRhombus(new Rhombus(this), (char)Symbols.none);
 
             _x += deltaX;
             _y += deltaY;
 
-            UI.PrintFigures(new Rhombus(this));
+            UI.PrintRhombus(new Rhombus(this), (char)Symbols.point);
         }
 
         public override void Resize(double Present)
         {
-            CustomMethods.ClearRhombus(new Rhombus(this));
+            UI.PrintFigures(new Rhombus(this), (char)Symbols.none);
 
             _height = (int)(Math.Ceiling((double)(Height
                * (Present / 100 + 1))));
 
-            UI.PrintFigures(new Rhombus(this));
+            UI.PrintFigures(new Rhombus(this), (char)Symbols.point);
         }
 
       

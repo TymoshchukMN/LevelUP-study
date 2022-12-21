@@ -1,7 +1,7 @@
 ﻿///////////////////////////////
 // Author : Tymoshchuk Maksym
 // Created On : 12/12/2022
-// Last Modified On : 
+// Last Modified On : 14/12/2022
 // Description: Figures
 // Project: HW_13
 ///////////////////////////////
@@ -13,7 +13,7 @@ using System.Text;
 
 namespace HW_13
 {
-    public abstract class Figures
+    public class Figures
     {
 
         #region Fields
@@ -66,7 +66,8 @@ namespace HW_13
         /// </summary>
         /// <param name="deltaX"> наколько смещаем по оси Х </param>
         /// <param name="deltaY"> наколько смещаем по оси Х </param>
-        public abstract void Move(int deltaX, int deltaY);
+        public virtual void Move(int deltaX, int deltaY)
+        { }
 
         /// <summary>
         /// Изменение размера фигуры
@@ -74,6 +75,8 @@ namespace HW_13
         /// <param name="Present">
         /// % на который меняется размер
         /// </param>
-        public abstract void Resize(double Present);
+        public virtual void Resize(double Present) { }
+
+
     }
 }

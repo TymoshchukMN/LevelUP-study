@@ -9,24 +9,18 @@
   <Comment CommentText="Класс, содержащий в себе, отдельные фигуры в виде массива">
     <Position X="11.009" Y="0.731" Height="0.75" Width="1.7" />
   </Comment>
-  <Class Name="HW_13.Figures">
-    <Position X="5.25" Y="0.5" Width="1.25" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAIAIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
-      <FileName>Figures.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="HW_13.FlatFigures">
-    <Position X="2.5" Y="1.25" Width="1.25" />
+    <Position X="2" Y="1.5" Width="1.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>FlatFigures.cs</FileName>
+      <NewMemberFileName>Figures.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HW_13.VolumetricFigures">
     <Position X="8.25" Y="1.5" Width="1.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAE=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAE=</HashCode>
       <FileName>VolumetricFigures.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -54,29 +48,36 @@
   <Class Name="HW_13.Triangle">
     <Position X="4.25" Y="4" Width="1.25" />
     <TypeIdentifier>
-      <HashCode>AAAAACAAAIAAAAAAAAAAAAAAAAAAACAAAEAAAAGABAA=</HashCode>
+      <HashCode>AAAAACAAAIBAACAAAAAAAAAAEAAAACAAAEAAAAGABAA=</HashCode>
       <FileName>Triangle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HW_13.Parallelepiped">
     <Position X="8.25" Y="4.25" Width="1.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAABIDAACAAAAAAAEAAEBAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Parallelepiped.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HW_13.Pictures">
     <Position X="11" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAAAAAAAAIAAAAAAAAACAAAAAAAAAAQAAAAAAAEAAAA=</HashCode>
       <FileName>Pictures.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HW_13.Rhombus">
     <Position X="5.75" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABICAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <HashCode>AAAAAAAABIDAACAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Rhombus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HW_13.Figures" Collapsed="true">
+    <Position X="4.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAIQAAAAAAAAAAAAAAAAAAAAAAAAAAAEAYAA=</HashCode>
+      <FileName>Figures.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

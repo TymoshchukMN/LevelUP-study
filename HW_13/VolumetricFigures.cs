@@ -31,6 +31,8 @@ namespace HW_13
             set { _z = value; }
         }
 
-
+        public virtual void Rotate(RotatorEnum rotator)
+        {
+        }
     }
 }

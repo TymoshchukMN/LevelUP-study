@@ -1,7 +1,7 @@
 ﻿///////////////////////////////
 // Author : Tymoshchuk Maksym
 // Created On : 12/12/2022
-// Last Modified On : 
+// Last Modified On : 14/12/2022
 // Description: Square
 // Project: HW_13
 ///////////////////////////////
@@ -80,22 +80,24 @@ namespace HW_13
         /// </param>
         public override void Move(int deltaX, int deltaY)
         {
-            CustomMethods.ClearSquare(new Square(this));
+            //UI.PrintFigures(new Square(this), (char)Symbols.none);
+
+            UI.PrintSquare(new Square(this), (char)Symbols.none);
 
             _x += deltaX;
             _y += deltaY;
             
-            UI.PrintFigures(new Square(this));
+            UI.PrintFigures(new Square(this), (char)Symbols.symbolType1);
         }
 
         public override void Resize(double Present)
         {
-            CustomMethods.ClearSquare(new Square(this));
+            UI.PrintFigures(new Square(this), (char)Symbols.none);
 
             _length = (int)(Math.Ceiling((double)(Length 
                 * (Present / 100 + 1))));
 
-            UI.PrintFigures(new Square(this));
+            UI.PrintFigures(new Square(this), (char)Symbols.symbolType1);
         }
 
 

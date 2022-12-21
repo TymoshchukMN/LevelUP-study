@@ -57,6 +57,7 @@
     <Compile Include="Rhombus.cs" />
     <Compile Include="RotatorEnum.cs" />
     <Compile Include="Square.cs" />
+    <Compile Include="Symbols.cs" />
     <Compile Include="test.cs" />
     <Compile Include="Triangle.cs" />
     <Compile Include="UI.cs" />
@@ -65,6 +66,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

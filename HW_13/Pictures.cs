@@ -1,4 +1,12 @@
-﻿using System;
+﻿///////////////////////////////
+// Author : Tymoshchuk Maksym
+// Created On : 12/12/2022
+// Last Modified On : 14/12/2022
+// Description: Класс, хранящий в себе все фигуры
+// Project: HW_13
+///////////////////////////////
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,17 +14,19 @@ using System.Text;
 namespace HW_13
 {
     /// <summary>
-    /// Класс содержащий в себе фигуры в виде массива
+    /// Класс содержащий в себе фигуры в виде массива,
+    /// НЕ ЯВЛЯЕТСЯ участником наследования
     /// </summary>
     public class Pictures
     {
         /// <summary>
         /// Массив фигур
         /// </summary>
-        FlatFigures[] _figures;
+        //FlatFigures[] _figures;
+        Figures[] _figures; 
 
 
-        public FlatFigures[] Figures
+        public Figures[] Figures
         {
             get { return _figures; }
         }
@@ -29,9 +39,9 @@ namespace HW_13
         /// <param name="figures">
         /// фигуры
         /// </param>
-        public Pictures(params FlatFigures[] figures)
+        public Pictures(params Figures[] figures)
         {
-            _figures = (FlatFigures[])figures.Clone();
+            _figures = (Figures[])figures.Clone();
         }
 
         #endregion КОНСТРУКТОРЫ

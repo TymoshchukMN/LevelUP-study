@@ -1,4 +1,12 @@
-﻿using System;
+﻿///////////////////////////////
+// Author : Tymoshchuk Maksym
+// Created On : 12/12/2022
+// Last Modified On : 14/12/2022
+// Description: Triangle
+// Project: HW_13
+///////////////////////////////
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -92,26 +100,27 @@ namespace HW_13
         public Triangle(Triangle triangle)
             :base(triangle.X, triangle.Y)
         {
-            _cathetus1 = triangle._cathetus1;
-            _cathetus2 = triangle._cathetus2;
-            _rotator = triangle.Rotator;
+            _cathetus1  = triangle.Cathetus1;
+            _cathetus2  = triangle.Cathetus2;
+            _rotator    = triangle.Rotator;
         }
 
         #endregion КОНСТРУКТОР
 
         public override void Move(int deltaX, int deltaY)
         {
-            CustomMethods.ClearTriangle(new Triangle(this));
+            UI.Printtriangle(new Triangle(this), (char)Symbols.none);
 
             _x += deltaX;
             _y += deltaY;
 
-            UI.PrintFigures(new Triangle(this));
+            UI.Printtriangle(new Triangle(this), (char)Symbols.symbolType2);
+
         }
 
         public override void Resize(double Present)
         {
-            CustomMethods.ClearTriangle(new Triangle(this));
+            UI.Printtriangle(new Triangle(this), (char)Symbols.none);
 
             _cathetus1 = (int)(Math.Ceiling((double)(Cathetus1
                 * (Present / 100 + 1))));
@@ -119,7 +128,7 @@ namespace HW_13
             _cathetus2 = (int)(Math.Ceiling((double)(Cathetus2
                 * (Present / 100 + 1))));
 
-            UI.PrintFigures(new Triangle(this));
+            UI.Printtriangle(new Triangle(this), (char)Symbols.symbolType2);
         }
 
         /// <summary>
@@ -130,11 +139,11 @@ namespace HW_13
         /// </param>
         public override void Rotate(RotatorEnum rotator)
         {
-            CustomMethods.ClearTriangle(new Triangle(this));
+            UI.Printtriangle(new Triangle(this), (char)Symbols.none);
 
             _rotator = rotator;
 
-            UI.PrintFigures(new Triangle(this));
+            UI.Printtriangle(new Triangle(this), (char)Symbols.symbolType2);
         }
     }
 }

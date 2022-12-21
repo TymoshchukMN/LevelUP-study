@@ -1,7 +1,7 @@
 ﻿///////////////////////////////
 // Author : Tymoshchuk Maksym
 // Created On : 12/12/2022
-// Last Modified On : 
+// Last Modified On : 14/12/2022
 // Description: Класс пользовательские методы
 // Project: HW_13
 ///////////////////////////////
@@ -240,6 +240,50 @@ namespace HW_13
                         ++tmpTop;
                     }
 
-        }    
+        }
+
+        public static void ClearParallelepiped(Parallelepiped figure)
+        {
+            int offset = 0;
+
+            int tmpLeft = figure.X;
+            int tmpTop = figure.Y;
+
+            Console.SetCursorPosition(tmpLeft, tmpTop);
+
+            PrintParallelipiped();
+
+            offset = 3;
+            tmpLeft = figure.X + offset;
+            tmpTop = figure.Y - offset;
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+
+            PrintParallelipiped();
+
+            void PrintParallelipiped()
+            {
+                for (ushort i = 0; i <= figure.Width; i++)
+                {
+                    Console.SetCursorPosition(tmpLeft, tmpTop);
+                    Console.Write(' ');
+                    Console.SetCursorPosition(tmpLeft, tmpTop + figure.Height);
+                    Console.Write(' ');
+                    ++tmpLeft;
+                }
+
+                tmpLeft = figure.X + offset;
+                tmpTop = figure.Y + 1 - offset;
+
+                for (ushort i = 0; i < figure.Height; i++)
+                {
+                    Console.SetCursorPosition(tmpLeft, tmpTop);
+                    Console.Write(' ');
+                    Console.SetCursorPosition(tmpLeft + figure.Width, tmpTop);
+                    Console.Write(' ');
+                    ++tmpTop;
+                }
+            }
+        }
     }
 }

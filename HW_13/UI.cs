@@ -1,8 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿///////////////////////////////
+// Author : Tymoshchuk Maksym
+// Created On : 12/12/2022
+// Last Modified On : 14/12/2022
+// Description: Пользовательсякий интерфес
+// Project: HW_13
+///////////////////////////////
+
+using System;
+
 
 namespace HW_13
 {
@@ -25,11 +30,12 @@ namespace HW_13
         /// <param name="figure">
         /// фигура для печати
         /// </param>
-        public static void PrintFigures(FlatFigures figure)
+        public static void PrintFigures(Figures figure
+            , char symbol = (char)Symbols.symbolType1)
         {
             if (figure is Square)
             {
-                PrintSquare(new Square((Square)figure));
+                PrintSquare(new Square((Square)figure), symbol);
 
                 return;
             }
@@ -94,7 +100,7 @@ namespace HW_13
                 {
                     if (figure is Triangle)
                     {
-                        Printtriangle(new Triangle((Triangle)figure));
+                        Printtriangle(new Triangle((Triangle)figure), symbol);
                         return;
                     }
                     else
@@ -107,9 +113,21 @@ namespace HW_13
                         {
                             if (figure is Rhombus)
                             {
-                                PrintRhombus(new Rhombus((Rhombus)figure));
+                                PrintRhombus(new Rhombus((Rhombus)figure)
+                                    , symbol);
 
                                 return;
+                            }
+                            else
+                            {
+                                if (figure is Parallelepiped)
+                                {
+                                    PrintParallelepiped(
+                                        new Parallelepiped((Parallelepiped)figure)
+                                        , symbol);
+                                    return;
+                                }
+                                
                             }
                         }
                     }
@@ -117,7 +135,7 @@ namespace HW_13
             }
         }
 
-        private static void PrintRhombus(Rhombus rhombus)
+        public static void PrintRhombus(Rhombus rhombus, char symbol)
         {
             ConsoleColor defColor = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Green;
@@ -133,7 +151,7 @@ namespace HW_13
             for (int i = 0; i < rhombus.Height / 2; i++)
             {
                 Console.SetCursorPosition(tmpLeft, tmpTop);
-                Console.Write('*');
+                Console.Write(symbol);
                 --tmpLeft;
                 ++tmpTop;
             }
@@ -141,7 +159,7 @@ namespace HW_13
             for (int i = 0; i < rhombus.Height / 2; i++)
             {
                 Console.SetCursorPosition(tmpLeft, tmpTop);
-                Console.Write('*');
+                Console.Write(symbol);
                 ++tmpLeft;
                 ++tmpTop;
             }
@@ -152,7 +170,7 @@ namespace HW_13
             for (int i = 0; i < rhombus.Height / 2; i++)
             {
                 Console.SetCursorPosition(tmpLeft, tmpTop);
-                Console.Write('*');
+                Console.Write(symbol);
                 ++tmpLeft;
                 ++tmpTop;
             }
@@ -160,7 +178,7 @@ namespace HW_13
             for (int i = 0; i <= rhombus.Height / 2; i++)
             {
                 Console.SetCursorPosition(tmpLeft, tmpTop);
-                Console.Write('*');
+                Console.Write(symbol);
                 --tmpLeft;
                 ++tmpTop;
             }
@@ -170,15 +188,14 @@ namespace HW_13
             Console.SetCursorPosition(oldLeft, oldTop);
         }
 
-        private static void Printtriangle(Triangle triangle)
+        public static void Printtriangle(Triangle triangle
+            , char symbol)
         {
             ConsoleColor def = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Cyan;
 
             int oldLeft = Console.CursorLeft;
             int oldTop = Console.CursorTop;
-
-            //Triangle triangle = new Triangle((Triangle)triangle);
 
             int tmpLeft = triangle.X;
             int tmpTop = triangle.Y;
@@ -192,15 +209,15 @@ namespace HW_13
                         if (i == 0)
                         {
                             Console.SetCursorPosition(tmpLeft, tmpTop);
-                            Console.Write("*");
+                            Console.Write(symbol);
                         }
                         else
                         {
                             ++tmpTop;
                             Console.SetCursorPosition(tmpLeft, tmpTop);
-                            Console.Write("*");
+                            Console.Write(symbol);
                             Console.SetCursorPosition(tmpLeft + i, tmpTop);
-                            Console.Write("*");
+                            Console.Write(symbol);
                         }
                     }
 
@@ -210,7 +227,7 @@ namespace HW_13
                     for (int i = 0; i < triangle.Cathetus2; i++)
                     {
                         Console.SetCursorPosition(tmpLeft + i, tmpTop);
-                        Console.Write("*");
+                        Console.Write(symbol);
                     }
 
                     break;
@@ -220,7 +237,7 @@ namespace HW_13
                     for (int i = 0; i < triangle.Cathetus1; i++)
                     {
                         Console.SetCursorPosition(tmpLeft, tmpTop);
-                        Console.Write("*");
+                        Console.Write(symbol);
 
                         ++tmpLeft;
                     }
@@ -231,14 +248,14 @@ namespace HW_13
                     {
                         ++tmpTop;
                         Console.SetCursorPosition(triangle.X, tmpTop);
-                        Console.Write("*");
+                        Console.Write(symbol);
 
                         tmpLeft = triangle.X + triangle.Cathetus1 - i - 2;
 
                         if (tmpLeft > triangle.X)
                         {
                             Console.SetCursorPosition(tmpLeft, tmpTop);
-                            Console.Write("*");
+                            Console.Write(symbol);
                         }
                         else
                         {
@@ -252,7 +269,7 @@ namespace HW_13
                     for (int i = 0; i < triangle.Cathetus2; i++)
                     {
                         Console.SetCursorPosition(tmpLeft, tmpTop);
-                        Console.Write("*");
+                        Console.Write(symbol);
 
                         ++tmpLeft;
                     }
@@ -266,14 +283,14 @@ namespace HW_13
                             + triangle.Cathetus1 - 1;
                         Console.SetCursorPosition(rightSide, tmpTop);
 
-                        Console.Write("*");
+                        Console.Write(symbol);
 
                         tmpLeft = triangle.X + i + 1;
 
                         if (tmpLeft < rightSide)
                         {
                             Console.SetCursorPosition(tmpLeft, tmpTop);
-                            Console.Write("*");
+                            Console.Write(symbol);
                         }
                         else
                         {
@@ -289,7 +306,7 @@ namespace HW_13
             Console.ForegroundColor = def;
         }
 
-        private static void PrintSquare(Square square)
+        public static void PrintSquare(Square square, char symbol)
         {
             ConsoleColor def = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Magenta;
@@ -307,17 +324,17 @@ namespace HW_13
             for (int i = square.X; i <= square.X + square.Length; i++)
             {
                 Console.SetCursorPosition(i, square.Y);
-                Console.Write('.');
+                Console.Write(symbol);
                 Console.SetCursorPosition(i, square.Y + square.Length);
-                Console.Write('.');
+                Console.Write(symbol);
             }
 
             for (int i = square.Y; i <= square.Y + square.Length; i++)
             {
                 Console.SetCursorPosition(square.X, i);
-                Console.Write('.');
+                Console.Write(symbol);
                 Console.SetCursorPosition(square.X + square.Length, i);
-                Console.Write('.');
+                Console.Write(symbol);
             }
 
             #endregion
@@ -326,6 +343,104 @@ namespace HW_13
             Console.SetCursorPosition(oldLeft, oldTop);
         }
 
-        
+        public static void PrintParallelepiped(Parallelepiped figure
+            , char symbol)
+        {
+            ConsoleColor defColor   = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            int offset = 0;
+            const int OFFSET_STEP = 3;
+            int tmpLeft = figure.X;
+            int tmpTop = figure.Y;
+
+            Console.SetCursorPosition(tmpLeft, tmpTop);
+
+            switch (figure.Rotator)
+            {
+                case RotatorEnum.none:
+
+                    PrintParallelipiped90();
+
+                    offset += OFFSET_STEP;
+                    tmpLeft = figure.X + offset;
+                    tmpTop = figure.Y - offset;
+
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+
+                    PrintParallelipiped90();
+
+                    break;
+                case RotatorEnum.rotate_90:
+
+                    PrintParallelipiped180();
+
+                    offset += OFFSET_STEP;
+                    tmpLeft = figure.X - offset;
+                    tmpTop = figure.Y - offset;
+
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.SetCursorPosition(tmpLeft, tmpTop);
+                    PrintParallelipiped180();
+
+                    break;
+            }
+
+           
+                     
+            void PrintParallelipiped90()
+            {
+                for (ushort i = 0; i <= figure.Width; i++)
+                {
+                    Console.SetCursorPosition(tmpLeft, tmpTop);
+                    Console.Write(symbol);
+                    Console.SetCursorPosition(tmpLeft, tmpTop 
+                        + figure.Height);
+                    Console.Write(symbol);
+                    ++tmpLeft;
+                }
+
+                tmpLeft = figure.X + offset;
+                tmpTop = figure.Y + 1 - offset;
+
+                for (ushort i = 0; i < figure.Height; i++)
+                {
+                    Console.SetCursorPosition(tmpLeft, tmpTop);
+                    Console.Write(symbol);
+                    Console.SetCursorPosition(tmpLeft 
+                        + figure.Width, tmpTop);
+                    Console.Write(symbol);
+                    ++tmpTop;
+                }
+            }
+
+            Console.ForegroundColor = defColor;
+
+            void PrintParallelipiped180()
+            {
+                for (ushort i = 0; i < figure.Height; i++)
+                {
+                    Console.SetCursorPosition(tmpLeft, tmpTop);
+                    Console.Write(symbol);
+                    Console.SetCursorPosition(tmpLeft, tmpTop
+                        + figure.Width);
+                    Console.Write(symbol);
+                    ++tmpLeft;
+                }
+
+                tmpLeft = figure.X - offset;
+                tmpTop = figure.Y - offset + 1;
+
+                for (ushort i = 0; i < figure.Width; i++)
+                {
+                    Console.SetCursorPosition(tmpLeft, tmpTop);
+                    Console.Write(symbol);
+                    Console.SetCursorPosition(tmpLeft
+                        + figure.Height, tmpTop);
+                    Console.Write(symbol);
+                    ++tmpTop;
+                }
+            }
+        }
     }
 }

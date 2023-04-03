@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Game3.Beetle" Collapsed="true">
+    <Position X="2.5" Y="3" Width="1.5" />
+    <InheritanceLine Type="Game3.GameItem" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.75" Y="2.44" />
+        <Point X="5.75" Y="2.625" />
+        <Point X="3.25" Y="2.625" />
+        <Point X="3.25" Y="3" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAIQgAAAAAAAAQAAAAACAEAAAgAgAAAAAYAA=</HashCode>
+      <FileName>Beetle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game3.Shooter" Collapsed="true">
+    <Position X="8.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAIQAAAAAAAAAAgAAAAAAAAAAAAAAAAAEYAA=</HashCode>
+      <FileName>Shooter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game3.GameConsole" Collapsed="true">
+    <Position X="8" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>GameConsole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game3.GameItem">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAABQAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>GameItems.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game3.Bullet">
+    <Position X="8.5" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="Game3.GameItem" ManuallyRouted="true">
+      <Path>
+        <Point X="5.75" Y="2.44" />
+        <Point X="5.75" Y="3.906" />
+        <Point X="9.25" Y="3.906" />
+        <Point X="9.25" Y="4.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAQAAAAAAAAAAABAAAAIAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Bullet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game3.BL" Collapsed="true">
+    <Position X="2.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAIAAAAAADhAwAAAAAAAAAAAAQAAIAEAAI=</HashCode>
+      <FileName>BL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game3.BeetleType1" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAkAgAAAAAAAQEAAA=</HashCode>
+      <FileName>BeetleType1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game3.BeetleType2" Collapsed="true">
+    <Position X="2.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAEAAA=</HashCode>
+      <FileName>BeetleType2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game3.BeetleType3" Collapsed="true">
+    <Position X="4.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAkAAAAAAAAAAFAAA=</HashCode>
+      <FileName>BeetleType3.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Game3.Score">
+    <Position X="11.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIEAYAEAAIAAAEQAAIAAIAAAAGAAEAAAgAAQIAAELAA=</HashCode>
+      <FileName>Score.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="Game3.GameSymbols" Collapsed="true">
+    <Position X="0.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwAAEAADAAQACQAAAAAAgAAAQDQIAAAAAAEABkYAAAA=</HashCode>
+      <FileName>GameSymbols.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
